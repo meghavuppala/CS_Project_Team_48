@@ -335,6 +335,88 @@ public class MainActivity2 extends AppCompatActivity {
                             }
                         });
                     }
+//                    192.168.10.55
+
+                    if(playerId==1 && message.startsWith("server: Player1 card1 ")){
+                        card1 = Integer.parseInt(message.substring(22,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                assignImages(card1, iv_card1);
+                            }
+                        });
+                    }
+                    if(playerId==1 && message.startsWith("server: Player1 card2 ")){
+                        card2 = Integer.parseInt(message.substring(22,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                assignImages(card2, iv_card2);
+                            }
+                        });
+                    }
+                    if(playerId==1 && message.startsWith("server: Player1 card3 ")){
+                        card3 = Integer.parseInt(message.substring(22,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                assignImages(card3, iv_card3);
+                            }
+                        });
+                    }
+                    if(playerId==1 && message.startsWith("server: Player1 card4 ")){
+                        card4 = Integer.parseInt(message.substring(22,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                assignImages(card4, iv_card4);
+                            }
+                        });
+                    }
+                    if(playerId==2 && message.startsWith("server: Player2 card1 ")){
+                        card1 = Integer.parseInt(message.substring(22,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                assignImages(card1, iv_card1);
+                            }
+                        });
+                    }
+                    if(playerId==2 && message.startsWith("server: Player2 card2 ")){
+                        card2 = Integer.parseInt(message.substring(22,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                assignImages(card2, iv_card2);
+                            }
+                        });
+                    }
+                    if(playerId==2 && message.startsWith("server: Player2 card3 ")){
+                        card3 = Integer.parseInt(message.substring(22,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                assignImages(card3, iv_card3);
+                            }
+                        });
+                    }
+                    if(playerId==2 && message.startsWith("server: Player2 card4 ")){
+                        card4 = Integer.parseInt(message.substring(22,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                assignImages(card4, iv_card4);
+                            }
+                        });
+                    }
 
                     if (message != null && message.startsWith("server: You are player ")) {
                         playerId = Integer.parseInt(message.substring("server: You are player ".length()));

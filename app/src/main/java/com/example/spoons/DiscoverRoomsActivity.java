@@ -69,6 +69,16 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
     int card3 = 0;
     int card4 = 0;
 
+    int card5 = 0;
+    int card6 = 0;
+    int card7 = 0;
+    int card8 = 0;
+
+    int card9 = 0;
+    int card10 = 0;
+    int card11 = 0;
+    int card12 = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,11 +231,34 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Collections.shuffle(cards);
 
+                new Thread(new Thread3("Game Has Started")).start();
+
 
                 card1 = cards.get(0);
                 card2  = cards.get(1);
                 card3 = cards.get(2);
                 card4 = cards.get(3);
+
+                card5 = cards.get(4);
+                card6 = cards.get(5);
+                card7 = cards.get(6);
+                card8 = cards.get(7);
+
+                new Thread(new Thread3("Player1 card1 "+card5)).start();
+                new Thread(new Thread3("Player1 card2 "+card6)).start();
+                new Thread(new Thread3("Player1 card3 "+card7)).start();
+                new Thread(new Thread3("Player1 card4 "+card8)).start();
+
+
+                card9 = cards.get(8);
+                card10 = cards.get(9);
+                card11 = cards.get(10);
+                card12 = cards.get(11);
+
+                new Thread(new Thread3("Player2 card1 "+card9)).start();
+                new Thread(new Thread3("Player2 card2 "+card10)).start();
+                new Thread(new Thread3("Player2 card3 "+card11)).start();
+                new Thread(new Thread3("Player2 card4 "+card12)).start();
 
                 assignImages(card1, iv_card1);
                 assignImages(card2, iv_card2);
@@ -245,7 +278,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 cards.remove(cards.indexOf(card3));
                 cards.remove(cards.indexOf(card4));
 
-                new Thread(new Thread3("Game Has Started")).start();
+
 
                 startButton.setVisibility(View.INVISIBLE);
 
