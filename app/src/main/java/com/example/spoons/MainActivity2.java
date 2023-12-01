@@ -189,6 +189,9 @@ public class MainActivity2 extends AppCompatActivity {
                     //cardSwap.setVisibility(View.VISIBLE);
                     assignImages(card1, cardSwap);
                     assignImages(singleCard, iv_card1);
+                    if(playerId==1) {
+                        new Thread(new MainActivity2.Thread3("Player2 cardSwap " + card1)).start();
+                    }
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -206,6 +209,9 @@ public class MainActivity2 extends AppCompatActivity {
                 {
                     assignImages(card2, cardSwap);
                     assignImages(singleCard, iv_card2);
+                    if(playerId==1) {
+                        new Thread(new MainActivity2.Thread3("Player2 cardSwap " + card2)).start();
+                    }
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -222,6 +228,9 @@ public class MainActivity2 extends AppCompatActivity {
                 {
                     assignImages(card3, cardSwap);
                     assignImages(singleCard, iv_card3);
+                    if(playerId==1) {
+                        new Thread(new MainActivity2.Thread3("Player2 cardSwap " + card3)).start();
+                    }
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -239,6 +248,9 @@ public class MainActivity2 extends AppCompatActivity {
                 {
                     assignImages(card4, cardSwap);
                     assignImages(singleCard, iv_card4);
+                    if(playerId==1) {
+                        new Thread(new MainActivity2.Thread3("Player2 cardSwap " + card4)).start();
+                    }
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -440,6 +452,17 @@ public class MainActivity2 extends AppCompatActivity {
                             public void run() {
                                 // Update UI components here
                                 assignImages(card4, iv_card4);
+                            }
+                        });
+                    }
+                    if(playerId==2 && message.startsWith("client: Player2 cardSwap ")){
+                        singleCard = Integer.parseInt(message.substring(25,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                cardSwap.setVisibility(View.VISIBLE);
+                                assignImages(singleCard, cardSwap);
                             }
                         });
                     }
