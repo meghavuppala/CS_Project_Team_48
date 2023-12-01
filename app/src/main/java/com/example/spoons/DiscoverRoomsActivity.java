@@ -245,6 +245,8 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 cards.remove(cards.indexOf(card3));
                 cards.remove(cards.indexOf(card4));
 
+                new Thread(new Thread3("Game Has Started")).start();
+
                 startButton.setVisibility(View.INVISIBLE);
 
             }

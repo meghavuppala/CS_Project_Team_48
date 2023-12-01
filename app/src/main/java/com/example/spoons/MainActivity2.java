@@ -320,6 +320,22 @@ public class MainActivity2 extends AppCompatActivity {
                             }
                         });
                     }
+
+                    if(message.equals("server: Game Has Started ")){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                iv_card1.setVisibility(View.VISIBLE);
+                                iv_card2.setVisibility(View.VISIBLE);
+                                iv_card3.setVisibility(View.VISIBLE);
+                                iv_card4.setVisibility(View.VISIBLE);
+
+
+                            }
+                        });
+                    }
+
                     if (message != null && message.startsWith("server: You are player ")) {
                         playerId = Integer.parseInt(message.substring("server: You are player ".length()));
                         runOnUiThread(new Runnable() {
