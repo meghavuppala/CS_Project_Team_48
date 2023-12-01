@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/lay"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:weightSum="6"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="38dp"
-        tools:ignore="MissingConstraints"/>
-
     <Button
         android:id="@+id/button5"
         android:layout_width="177dp"
@@ -37,23 +25,21 @@
         android:layout_width="93dp"
         android:layout_height="52dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="189dp"
         android:layout_marginBottom="11dp"
         android:text="SWAP"
         app:layout_constraintBottom_toTopOf="@+id/passButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lay" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
         android:id="@+id/passButton"
         android:layout_width="92dp"
         android:layout_height="57dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="11dp"
-        android:layout_marginBottom="96dp"
         android:text="PASS"
-        app:layout_constraintBottom_toTopOf="@+id/iv_card1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swapButton" />
 
@@ -62,7 +48,7 @@
         android:layout_width="92dp"
         android:layout_height="131dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="263dp"
+        android:layout_marginTop="93dp"
         android:layout_marginBottom="199dp"
         android:layout_weight="1"
         android:scaleType="centerInside"
@@ -70,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_card2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lay" />
+        app:layout_constraintTop_toBottomOf="@+id/passButton" />
 
     <ImageView
         android:id="@+id/iv_card2"
@@ -99,12 +85,12 @@
         android:id="@+id/iv_card4"
         android:layout_width="92dp"
         android:layout_height="131dp"
-        android:layout_marginTop="263dp"
+        android:layout_marginTop="401dp"
         android:layout_weight="1"
         android:scaleType="centerInside"
         android:src="@drawable/ic_deckback"
         app:layout_constraintStart_toEndOf="@+id/iv_card3"
-        app:layout_constraintTop_toBottomOf="@+id/lay" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
@@ -112,26 +98,25 @@
         android:layout_width="92dp"
         android:layout_height="131dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="92dp"
         android:layout_marginEnd="141dp"
         android:layout_weight="1"
         android:scaleType="centerInside"
         android:src="@drawable/ic_deckback"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/swapButton"
-        app:layout_constraintTop_toBottomOf="@+id/lay" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="178dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="175dp"
-        android:layout_marginBottom="8dp"
         android:text="Player View"
-        app:layout_constraintBottom_toTopOf="@+id/lay"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

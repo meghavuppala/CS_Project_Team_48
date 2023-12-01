@@ -96,6 +96,7 @@ public class MainActivity2 extends AppCompatActivity {
                     final String message = input.readLine();
                     if(message.equals("server: Host started the game ")){
                         Intent intentStartPlayerGame = new Intent(MainActivity2.this, PlayerViewActivity.class);
+                        intentStartPlayerGame.putExtra("playerId",playerId);
                         startActivity(intentStartPlayerGame);
                     }
                     if (message != null && message.startsWith("server: You are player ")) {

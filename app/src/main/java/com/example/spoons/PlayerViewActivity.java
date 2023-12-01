@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -30,11 +32,21 @@ public class PlayerViewActivity extends AppCompatActivity {
     int card3 = 0;
     int card4 = 0;
 
+    int playerId;
+
+    TextView playerNumDisplay;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_view);
+
+        Intent intent = getIntent();
+        playerId = intent.getIntExtra("playerId",0);
+
+        playerNumDisplay = (TextView) findViewById(R.id.textView2);
+        playerNumDisplay.setText("Player Number: "+playerId);
 
         iv_card1 = (ImageView) findViewById(R.id.iv_card1);
         iv_card2 = (ImageView) findViewById(R.id.iv_card2);
