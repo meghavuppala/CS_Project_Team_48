@@ -30,6 +30,8 @@ public class MainActivity2 extends AppCompatActivity {
     private BufferedReader input;
     private Handler handler;
 
+    private int playerId;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,7 @@ public class MainActivity2 extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        tvMessages.setText("Connected");
+                        tvMessages.setText("Connected\n");
                     }
                 });
                 new Thread(new Thread2()).start();
@@ -96,11 +98,22 @@ public class MainActivity2 extends AppCompatActivity {
                         Intent intentStartPlayerGame = new Intent(MainActivity2.this, PlayerViewActivity.class);
                         startActivity(intentStartPlayerGame);
                     }
+                    if (message != null && message.startsWith("server: You are player ")) {
+                        playerId = Integer.parseInt(message.substring("server: You are player ".length()));
+
+                        // Handle player identifier on the client side
+//                        handler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                tvMessages.append("You are player " + playerId + "\n");
+//                            }
+//                        });
+                    }
                     if (message != null) {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                tvMessages.append("server: " + message + " ");
+                                tvMessages.append(message + " ");
                             }
                         });
                     } else {

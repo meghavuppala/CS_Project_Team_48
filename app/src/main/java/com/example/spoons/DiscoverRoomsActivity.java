@@ -43,6 +43,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
     public static final int SERVER_PORT = 44444;
     public static final int MAX_PLAYERS = 3;
     String message;
+    private int playerCounter = 0;
 
     private List<PrintWriter> playerOutputs = new ArrayList<>();
 
@@ -112,10 +113,16 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     playerOutputs.add(output);
 
+                    // Assign a unique identifier to the player
+                    int playerId = ++playerCounter;
+
+                    // Notify clients about the player identifier
+                    output.println("server: You are player " + playerId);
+
                     playerCounts++;
                     int finalPlayerCounts = playerCounts;
                     runOnUiThread(() -> {
-                        tvMessages.setText("Connected: " + finalPlayerCounts + " players");
+                        tvMessages.setText("Connected: " + finalPlayerCounts + " players\n");
                     });
 
                     if (playerCounts == MAX_PLAYERS) {
@@ -124,7 +131,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                         broadcastToAll("All players connected. Game can start!");
                     }
 
-                    new Thread(new Thread2(input)).start();
+                    new Thread(new Thread2(input, playerId)).start();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -142,9 +149,11 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
 
     private class Thread2 implements Runnable {
         private BufferedReader input;
+        private int playerId;
 
-        Thread2(BufferedReader input) {
+        Thread2(BufferedReader input, int playerId) {
             this.input = input;
+            this.playerId = playerId;
         }
 
         @Override
