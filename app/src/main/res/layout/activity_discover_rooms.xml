@@ -1,54 +1,88 @@
 <?xml version = "1.0" encoding = "utf-8"?>
-<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
-    xmlns:tools = "http://schemas.android.com/tools"
-    android:layout_width = "match_parent"
-    android:layout_height = "match_parent"
-    android:layout_margin = "16dp"
-    tools:context = ".MainActivity">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/SPOONS"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
     <TextView
-        android:id = "@+id/tvIP"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:textAppearance = "@style/Base.TextAppearance.AppCompat.Medium" />
+        android:id="@+id/tvIP"
+        android:layout_width="396dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id = "@+id/tvPort"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:layout_below = "@+id/tvIP"
-        android:textAppearance = "@style/Base.TextAppearance.AppCompat.Medium" />
+        android:id="@+id/tvPort"
+        android:layout_width="396dp"
+        android:layout_height="33dp"
+        android:layout_below="@+id/tvIP"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id = "@+id/tvConnectionStatus"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
-        android:layout_below = "@+id/tvPort"
-        android:textAppearance = "@style/Base.TextAppearance.AppCompat.Medium" />
+        android:id="@+id/tvConnectionStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPort"
+        android:layout_marginTop="85dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id = "@+id/tvMessages"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
-        android:layout_above = "@+id/etMessage"
-        android:layout_below = "@+id/tvConnectionStatus"
-        android:inputType = "textMultiLine"
-        android:textAppearance = "@style/Base.TextAppearance.AppCompat.Medium" />
+        android:id="@+id/tvMessages"
+        android:layout_width="409dp"
+        android:layout_height="528dp"
+        android:layout_above="@+id/etMessage"
+        android:layout_below="@+id/tvConnectionStatus"
+        android:inputType="textMultiLine"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvConnectionStatus" />
+
     <EditText
-        android:id = "@+id/etMessage"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
-        android:layout_above = "@+id/btnSend"
-        android:hint = "Enter Message"
-        android:inputType = "text" />
+        android:id="@+id/etMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSend"
+        android:layout_marginTop="2dp"
+        android:hint="Enter Message"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMessages" />
+
     <Button
-        android:id = "@+id/btnSend"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
-        android:layout_alignParentBottom = "true"
-        android:text = "SEND" />
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="SEND"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMessage" />
 
     <Button
         android:id="@+id/startGameHost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="233dp"
-        android:text="START GAME" />
-</RelativeLayout>
+        android:layout_marginTop="348dp"
+        android:text="START GAME"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--    Trying Something-->
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
