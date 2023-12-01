@@ -1,0 +1,10 @@
+<!-- custom_button_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="132dp" android:height="38dp">
+        <shape>
+            <solid android:color="#838C86" /> <!-- Background color -->
+            <corners android:radius="10dp" /> <!-- Corner radius (optional) -->
+            <padding android:left="0dp" android:top="0dp" android:right="0dp" android:bottom="0dp" /> <!-- Remove padding/margin -->
+        </shape>
+    </item>
+</layer-list>
