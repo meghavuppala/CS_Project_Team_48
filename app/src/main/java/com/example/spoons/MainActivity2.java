@@ -466,6 +466,7 @@ public class MainActivity2 extends AppCompatActivity {
                             }
                         });
                     }
+
                     if(playerId==2 && message.startsWith("client: Player2 cardPass ")){
                         singleCard = Integer.parseInt(message.substring(25,message.length()-1));
                         runOnUiThread(new Runnable() {
