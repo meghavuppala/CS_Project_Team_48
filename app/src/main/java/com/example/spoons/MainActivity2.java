@@ -264,6 +264,10 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View view) {
                 cardSwap.setVisibility(View.INVISIBLE);
                 //card is passed to next person
+                if(playerId==1) {
+                    new Thread(new MainActivity2.Thread3("Player2 cardPass " + singleCard)).start();
+                }
+                cards.remove(cards.indexOf(singleCard));
             }
         });
 
@@ -436,6 +440,17 @@ public class MainActivity2 extends AppCompatActivity {
                             public void run() {
                                 // Update UI components here
                                 assignImages(card4, iv_card4);
+                            }
+                        });
+                    }
+                    if(playerId==2 && message.startsWith("client: Player2 cardPass ")){
+                        singleCard = Integer.parseInt(message.substring(25,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                cardSwap.setVisibility(View.VISIBLE);
+                                assignImages(singleCard, cardSwap);
                             }
                         });
                     }

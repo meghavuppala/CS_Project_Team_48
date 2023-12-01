@@ -288,8 +288,6 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 cards.remove(cards.indexOf(card11));
                 cards.remove(cards.indexOf(card12));
 
-
-
                 startButton.setVisibility(View.INVISIBLE);
 
             }
@@ -494,7 +492,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 try {
                     final String message = input.readLine();
                     if (message != null) {
-                        broadcastToAll("client: " + message); // Broadcast the received message to all clients
+                        broadcastToAll("client: " + message+" "); // Broadcast the received message to all clients
                         runOnUiThread(() -> {
                             tvMessages.append("client: " + message + "\n");
                         });
