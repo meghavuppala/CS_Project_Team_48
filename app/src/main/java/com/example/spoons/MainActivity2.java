@@ -388,6 +388,17 @@ public class MainActivity2 extends AppCompatActivity {
                             }
                         });
                     }
+                    if(playerId==1 && message.startsWith("server: Player1 cardPass ")){
+                        singleCard = Integer.parseInt(message.substring(25,message.length()-1));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update UI components here
+                                cardSwap.setVisibility(View.VISIBLE);
+                                assignImages(singleCard, cardSwap);
+                            }
+                        });
+                    }
                     if(playerId==2 && message.startsWith("server: Player2 card1 ")){
                         card1 = Integer.parseInt(message.substring(22,message.length()-1));
                         runOnUiThread(new Runnable() {

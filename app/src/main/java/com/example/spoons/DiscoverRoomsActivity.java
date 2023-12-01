@@ -278,6 +278,16 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 cards.remove(cards.indexOf(card3));
                 cards.remove(cards.indexOf(card4));
 
+                cards.remove(cards.indexOf(card5));
+                cards.remove(cards.indexOf(card6));
+                cards.remove(cards.indexOf(card7));
+                cards.remove(cards.indexOf(card8));
+
+                cards.remove(cards.indexOf(card9));
+                cards.remove(cards.indexOf(card10));
+                cards.remove(cards.indexOf(card11));
+                cards.remove(cards.indexOf(card12));
+
 
 
                 startButton.setVisibility(View.INVISIBLE);
@@ -401,6 +411,8 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 cardSwap.setVisibility(View.INVISIBLE);
                 //card is passed to next person
+                new Thread(new Thread3("Player1 cardPass "+singleCard)).start();
+                cards.remove(cards.indexOf(singleCard));
             }
         });
 
