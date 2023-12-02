@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B5ECF3"
+    android:background="@drawable/new_game__2_"
     tools:context=".MainActivity">
 
     <Button
@@ -39,18 +39,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="#000000" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="417dp"
-        android:layout_height="118dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginBottom="104dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/whatsapp_image_2023_10_15_at_5_02_42_pm" />
 
     <ImageView
         android:id="@+id/imageView9"
