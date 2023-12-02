@@ -4,159 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B5ECF3"
+    android:background="@drawable/new_game__13_"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="390dp"
-        android:layout_height="271dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@drawable/rectangle_9__1_" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="Spoons Card Game Instructions:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.245"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.203" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="TUTORIAL"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="342dp"
-        android:layout_height="22dp"
-        android:fontFamily="sans-serif"
-        android:text="- Each player gets four cards from the deck"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.239" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="342dp"
-        android:layout_height="60dp"
-        android:fontFamily="sans-serif"
-        android:text="- The first person to get all four cards of the suite will grab a spoon from the middle (there are people -1 number of spoons in the middle)."
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="342dp"
-        android:layout_height="60dp"
-        android:fontFamily="sans-serif"
-        android:text="- Once one person grabs a spoon, the rest of the players have to get spoons too from the middle regardless of the four suits. "
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="342dp"
-        android:layout_height="22dp"
-        android:fontFamily="sans-serif"
-        android:text="- The player without the spoon looses."
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="342dp"
-        android:layout_height="22dp"
-        android:fontFamily="sans-serif"
-        android:text="- Keep playing until there is one player."
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="461dp"
-        android:layout_height="82dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="21dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/group_1" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="263dp"
-        android:layout_height="352dp"
-        android:layout_marginEnd="74dp"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:srcCompat="@drawable/image_2" />
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:background="#00BCD4"
+        android:layout_marginTop="16dp"
+        android:background="#000000"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/group_1__1_" />
+        app:srcCompat="@drawable/new_game__11_" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

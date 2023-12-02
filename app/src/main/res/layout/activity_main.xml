@@ -4,20 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/new_game__2_"
+    android:background="@drawable/new_game__6_"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="38dp"
-        android:layout_height="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.699"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.838"
-        app:srcCompat="@drawable/more_info_" />
 
     <ImageButton
         android:id="@+id/imageButton7"
@@ -33,14 +21,25 @@
 
     <ImageButton
         android:id="@+id/imageButton6"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="356dp"
         android:layout_width="246dp"
         android:layout_height="65dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="21dp"
         android:background="#000000"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/newstartgame" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="293dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="258dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/new_game__7_2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
