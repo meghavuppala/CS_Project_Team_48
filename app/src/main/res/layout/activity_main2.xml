@@ -37,6 +37,8 @@
         android:layout_below="@+id/etPort"
         android:layout_gravity="center"
         android:text="Connect To Server"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPort" />
 
@@ -70,6 +72,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="1dp"
         android:text="SEND"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -84,6 +88,8 @@
         android:layout_marginEnd="117dp"
         android:layout_marginBottom="130dp"
         android:text="SPOONS!"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -97,6 +103,8 @@
         android:layout_marginTop="189dp"
         android:layout_marginBottom="11dp"
         android:text="SWAP"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintBottom_toTopOf="@+id/passButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -109,6 +117,8 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="11dp"
         android:text="PASS"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swapButton" />
 

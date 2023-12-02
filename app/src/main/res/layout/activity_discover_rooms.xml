@@ -72,6 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="SEND"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMessage" />
 
@@ -82,12 +84,12 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="348dp"
         android:text="START GAME"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <!--    Trying Something-->
-
 
     <LinearLayout
         android:id="@+id/lay"
@@ -109,6 +111,8 @@
             android:layout_marginRight="234dp"
             android:layout_marginBottom="12dp"
             android:text="START"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="#FF0B06"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,6 +128,8 @@
         android:layout_marginEnd="117dp"
         android:layout_marginBottom="130dp"
         android:text="SPOONS!"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -140,6 +146,8 @@
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="11dp"
         android:text="SWAP"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintBottom_toTopOf="@+id/passButton"
         app:layout_constraintEnd_toStartOf="@+id/iv_deck"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,6 +163,8 @@
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="96dp"
         android:text="PASS"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF0B06"
         app:layout_constraintBottom_toTopOf="@+id/iv_card1"
         app:layout_constraintEnd_toStartOf="@+id/iv_deck"
         app:layout_constraintStart_toStartOf="parent"
