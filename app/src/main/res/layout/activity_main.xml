@@ -7,39 +7,6 @@
     android:background="@drawable/new_game__2_"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="223dp"
-        android:layout_height="95dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="392dp"
-        android:layout_marginEnd="105dp"
-        android:layout_marginBottom="49dp"
-        android:text="Click to Play"
-        android:textColorHighlight="#4CAF50"
-        android:textColorLink="#4CAF50"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="@color/white" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="217dp"
-        android:layout_height="98dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="98dp"
-        android:text="TUTORIAL"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="#000000" />
-
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="38dp"
@@ -51,5 +18,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.838"
         app:srcCompat="@drawable/more_info_" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="246dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="8dp"
+        android:background="#000000"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton6"
+        app:srcCompat="@drawable/newtutorial" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="356dp"
+        android:layout_width="246dp"
+        android:layout_height="65dp"
+        android:background="#000000"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/newstartgame" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

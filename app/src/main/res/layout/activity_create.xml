@@ -7,54 +7,14 @@
     android:background="@drawable/new_game__4_"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/newGameButton"
-        android:layout_width="200dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="270dp"
-        android:layout_marginEnd="94dp"
-        android:text="Create New Game"
-        android:textAlignment="gravity"
-        android:textAllCaps="true"
-        android:textColor="#E8DBDB"
-        android:textColorHighlight="#4CAF50"
-        android:textColorLink="#4CAF50"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/discoverButton"
-        android:layout_width="200dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="94dp"
-        android:text="DISCOVER GAME ROOMS"
-        android:textAlignment="gravity"
-        android:textAllCaps="true"
-        android:textColor="#E8DBDB"
-        android:textColorHighlight="#4CAF50"
-        android:textColorLink="#4CAF50"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.294"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGameButton" />
-
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="280dp"
-        android:layout_marginBottom="17dp"
-        android:background="#B5ECF3"
+        android:layout_marginStart="296dp"
+        android:layout_marginBottom="24dp"
+        android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/more_info" />
 
@@ -68,6 +28,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/group_1__1_" />
+
+    <ImageButton
+        android:id="@+id/imageView3"
+        android:layout_width="246dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="28dp"
+        android:background="#000000"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/newjoingame" />
+
+    <ImageButton
+        android:id="@+id/imageView2"
+        android:layout_width="246dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="216dp"
+        android:background="#000000"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButton"
+        app:srcCompat="@drawable/newnewgame" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

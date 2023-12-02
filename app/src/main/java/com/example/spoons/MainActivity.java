@@ -6,19 +6,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button buttonPressed;
-    Button clickToPlay;
+    ImageButton tutorial;
+    ImageButton clickToPlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonPressed = (Button)findViewById(R.id.button2);
-        buttonPressed.setOnClickListener(new View.OnClickListener() {
+        tutorial = (ImageButton)findViewById(R.id.imageButton7);
+        tutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentTutorial = new Intent(MainActivity.this, TutorialActivity.class);
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        clickToPlay = (Button)findViewById(R.id.button);
+        clickToPlay = (ImageButton)findViewById(R.id.imageButton6);
         clickToPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

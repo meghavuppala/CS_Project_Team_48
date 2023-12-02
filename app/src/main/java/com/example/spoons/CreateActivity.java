@@ -11,9 +11,9 @@ import android.widget.ImageButton;
 public class CreateActivity extends AppCompatActivity {
     ImageButton backButtonPressed;
     ImageButton tutorialButton;
-    Button createGameButton;
+    ImageButton createGameButton;
 
-    Button discoverGameButton;
+    ImageButton discoverGameButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
-        createGameButton = (Button)findViewById(R.id.newGameButton);
+        createGameButton = (ImageButton)findViewById(R.id.imageView2);
         createGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +46,7 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
-        discoverGameButton = (Button)findViewById(R.id.discoverButton);
+        discoverGameButton = (ImageButton)findViewById(R.id.imageView3);
         discoverGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
