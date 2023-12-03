@@ -328,7 +328,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     //cardSwap.setVisibility(View.VISIBLE);
                     assignImages(card1, cardSwap);
                     assignImages(singleCard, iv_card1);
-                    new Thread(new Thread3("Player1 cardSwap "+card1)).start();
+                    new Thread(new Thread3("Player1 cardS "+card1)).start();
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -348,7 +348,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 {
                     assignImages(card2, cardSwap);
                     assignImages(singleCard, iv_card2);
-                    new Thread(new Thread3("Player1 cardSwap "+card2)).start();
+                    new Thread(new Thread3("Player1 cardS "+card2)).start();
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -365,7 +365,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 {
                     assignImages(card3, cardSwap);
                     assignImages(singleCard, iv_card3);
-                    new Thread(new Thread3("Player1 cardSwap "+card3)).start();
+                    new Thread(new Thread3("Player1 cardS "+card3)).start();
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -383,7 +383,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 {
                     assignImages(card4, cardSwap);
                     assignImages(singleCard, iv_card4);
-                    new Thread(new Thread3("Player1 cardSwap "+card4)).start();
+                    new Thread(new Thread3("Player1 cardS "+card4)).start();
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -409,7 +409,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 cardSwap.setVisibility(View.INVISIBLE);
                 //card is passed to next person
-                new Thread(new Thread3("Player1 cardPass "+singleCard)).start();
+                new Thread(new Thread3("Player1 cardP "+singleCard)).start();
                 cards.remove(cards.indexOf(singleCard));
             }
         });

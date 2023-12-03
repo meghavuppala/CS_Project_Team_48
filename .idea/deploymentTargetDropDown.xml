@@ -7,13 +7,12 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\mkv08\.android\avd\Pixel_3_API_34.avd" />
+            <value value="C:\Users\mkv08\.android\avd\Pixel_4a_API_34.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-12-01T17:20:44.786415900Z" />
-    <multipleDevicesSelectedInDropDown value="true" />
+    <timeTargetWasSelectedWithDropDown value="2023-12-02T20:24:03.218681300Z" />
     <runningDeviceTargetsSelectedWithDialog>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
@@ -44,15 +43,6 @@
       </Target>
     </runningDeviceTargetsSelectedWithDialog>
     <targetsSelectedWithDialog>
-      <Target>
-        <type value="QUICK_BOOT_TARGET" />
-        <deviceKey>
-          <Key>
-            <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\mkv08\.android\avd\Pixel_7_API_34.avd" />
-          </Key>
-        </deviceKey>
-      </Target>
       <Target>
         <type value="QUICK_BOOT_TARGET" />
         <deviceKey>

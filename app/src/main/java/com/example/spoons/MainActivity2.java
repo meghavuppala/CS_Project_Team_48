@@ -190,7 +190,7 @@ public class MainActivity2 extends AppCompatActivity {
                     assignImages(card1, cardSwap);
                     assignImages(singleCard, iv_card1);
                     if(playerId==1) {
-                        new Thread(new MainActivity2.Thread3("Player2 cardSwap " + card1)).start();
+                        new Thread(new MainActivity2.Thread3("Player2 cardS " + card1)).start();
                     }
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
@@ -210,7 +210,7 @@ public class MainActivity2 extends AppCompatActivity {
                     assignImages(card2, cardSwap);
                     assignImages(singleCard, iv_card2);
                     if(playerId==1) {
-                        new Thread(new MainActivity2.Thread3("Player2 cardSwap " + card2)).start();
+                        new Thread(new MainActivity2.Thread3("Player2 cardS " + card2)).start();
                     }
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
@@ -229,7 +229,7 @@ public class MainActivity2 extends AppCompatActivity {
                     assignImages(card3, cardSwap);
                     assignImages(singleCard, iv_card3);
                     if(playerId==1) {
-                        new Thread(new MainActivity2.Thread3("Player2 cardSwap " + card3)).start();
+                        new Thread(new MainActivity2.Thread3("Player2 cardS " + card3)).start();
                     }
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
@@ -249,7 +249,7 @@ public class MainActivity2 extends AppCompatActivity {
                     assignImages(card4, cardSwap);
                     assignImages(singleCard, iv_card4);
                     if(playerId==1) {
-                        new Thread(new MainActivity2.Thread3("Player2 cardSwap " + card4)).start();
+                        new Thread(new MainActivity2.Thread3("Player2 cardS " + card4)).start();
                     }
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
@@ -277,7 +277,7 @@ public class MainActivity2 extends AppCompatActivity {
                 cardSwap.setVisibility(View.INVISIBLE);
                 //card is passed to next person
                 if(playerId==1) {
-                    new Thread(new MainActivity2.Thread3("Player2 cardPass " + singleCard)).start();
+                    new Thread(new MainActivity2.Thread3("Player2 cardP " + singleCard)).start();
                 }
                 cards.remove(cards.indexOf(singleCard));
             }
@@ -341,7 +341,6 @@ public class MainActivity2 extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                // Update UI components here
                                 iv_card1.setVisibility(View.VISIBLE);
                                 iv_card2.setVisibility(View.VISIBLE);
                                 iv_card3.setVisibility(View.VISIBLE);
@@ -351,134 +350,38 @@ public class MainActivity2 extends AppCompatActivity {
                             }
                         });
                     }
-//                    192.168.10.55
 
-                    if(playerId==1 && message.startsWith("server: Player1 card1 ")){
-                        card1 = Integer.parseInt(message.substring(22,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                assignImages(card1, iv_card1);
-                            }
-                        });
-                    }
-                    if(playerId==1 && message.startsWith("server: Player1 card2 ")){
-                        card2 = Integer.parseInt(message.substring(22,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                assignImages(card2, iv_card2);
-                            }
-                        });
-                    }
-                    if(playerId==1 && message.startsWith("server: Player1 card3 ")){
-                        card3 = Integer.parseInt(message.substring(22,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                assignImages(card3, iv_card3);
-                            }
-                        });
-                    }
-                    if(playerId==1 && message.startsWith("server: Player1 card4 ")){
-                        card4 = Integer.parseInt(message.substring(22,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                assignImages(card4, iv_card4);
-                            }
-                        });
-                    }
-                    if(playerId==1 && message.startsWith("server: Player1 cardSwap ")){
-                        singleCard = Integer.parseInt(message.substring(25,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                cardSwap.setVisibility(View.VISIBLE);
-                                assignImages(singleCard, cardSwap);
-                            }
-                        });
-                    }
-                    if(playerId==1 && message.startsWith("server: Player1 cardPass ")){
-                        singleCard = Integer.parseInt(message.substring(25,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                cardSwap.setVisibility(View.VISIBLE);
-                                assignImages(singleCard, cardSwap);
-                            }
-                        });
-                    }
-                    if(playerId==2 && message.startsWith("server: Player2 card1 ")){
-                        card1 = Integer.parseInt(message.substring(22,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                assignImages(card1, iv_card1);
-                            }
-                        });
-                    }
-                    if(playerId==2 && message.startsWith("server: Player2 card2 ")){
-                        card2 = Integer.parseInt(message.substring(22,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                assignImages(card2, iv_card2);
-                            }
-                        });
-                    }
-                    if(playerId==2 && message.startsWith("server: Player2 card3 ")){
-                        card3 = Integer.parseInt(message.substring(22,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                assignImages(card3, iv_card3);
-                            }
-                        });
-                    }
-                    if(playerId==2 && message.startsWith("server: Player2 card4 ")){
-                        card4 = Integer.parseInt(message.substring(22,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                assignImages(card4, iv_card4);
-                            }
-                        });
-                    }
-                    if(playerId==2 && message.startsWith("client: Player2 cardSwap ")){
-                        singleCard = Integer.parseInt(message.substring(25,message.length()-1));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Update UI components here
-                                cardSwap.setVisibility(View.VISIBLE);
-                                assignImages(singleCard, cardSwap);
-                            }
-                        });
-                    }
+                    if(message.startsWith("server: Player") || message.startsWith("client: Player")) {
+                        int playerNum = Integer.parseInt(message.substring(14,15));
+                        int cardVal = Integer.parseInt(message.substring(22, message.length() - 1));
 
-                    if(playerId==2 && message.startsWith("client: Player2 cardPass ")){
-                        singleCard = Integer.parseInt(message.substring(25,message.length()-1));
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                // Update UI components here
-                                cardSwap.setVisibility(View.VISIBLE);
-                                assignImages(singleCard, cardSwap);
+                                if (playerId == playerNum && message.substring(16, 21).equals("card1")) {
+                                    card1 = cardVal;
+                                    assignImages(card1, iv_card1);
+                                }else if (playerId == playerNum && message.substring(16, 21).equals("card2")) {
+                                    card2 = cardVal;
+                                    assignImages(card2, iv_card2);
+                                }else if (playerId == playerNum && message.substring(16, 21).equals("card3")) {
+                                    card3 = cardVal;
+                                    assignImages(card3, iv_card3);
+                                }else if (playerId == playerNum && message.substring(16, 21).equals("card4")) {
+                                    card4 = cardVal;
+                                    assignImages(card4, iv_card4);
+                                }else if (playerId == playerNum && message.substring(16, 21).equals("cardS")) {
+                                    singleCard = cardVal;
+                                    cardSwap.setVisibility(View.VISIBLE);
+                                    assignImages(singleCard, cardSwap);
+                                }else if (playerId == playerNum && message.substring(16, 21).equals("cardP")) {
+                                    singleCard = cardVal;
+                                    cardSwap.setVisibility(View.VISIBLE);
+                                    assignImages(singleCard, cardSwap);
+                                }
                             }
                         });
                     }
-
                     if (message != null && message.startsWith("server: You are player ")) {
                         playerId = Integer.parseInt(message.substring("server: You are player ".length()));
                         runOnUiThread(new Runnable() {
@@ -488,14 +391,6 @@ public class MainActivity2 extends AppCompatActivity {
                                 playerDisplay.setText("Player Number "+playerId);
                             }
                         });
-
-                        // Handle player identifier on the client side
-//                        handler.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                tvMessages.append("You are player " + playerId + "\n");
-//                            }
-//                        });
                     }
                     if (message != null) {
                         handler.post(new Runnable() {
