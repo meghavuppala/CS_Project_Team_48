@@ -19,6 +19,12 @@
         android:theme="@style/Theme.Spoons"
         tools:targetApi="31">
         <activity
+            android:name=".WinningPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoosingPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".GameView"
             android:exported="false" />
         <activity
