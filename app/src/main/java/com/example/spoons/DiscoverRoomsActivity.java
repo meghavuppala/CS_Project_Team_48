@@ -31,9 +31,6 @@ import java.util.List;
 
 @SuppressLint("SetTextI18n")
 public class DiscoverRoomsActivity extends AppCompatActivity {
-    public WifiP2pManager.PeerListListener peerListListener;
-    public WifiP2pManager.ConnectionInfoListener connectionInfoListener;
-    public WindowDecorActionBar.TabImpl connectionStatus;
     ServerSocket serverSocket;
     Thread Thread1 = null;
     TextView tvIP, tvPort;
@@ -96,9 +93,6 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intentStartHostGame = new Intent(DiscoverRoomsActivity.this, GameView.class);
-//                startActivity(intentStartHostGame);
-
                 String startMessage = "Host started the game";
                 new Thread(new Thread3(startMessage)).start();
 
@@ -153,7 +147,6 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         swapButton = (Button) findViewById(R.id.swapButton);
         passButton = (Button) findViewById(R.id.passButton);
         spoons = (Button) findViewById(R.id.button5);
-        //cardFinal = (ImageView) findViewById(R.id.cardFinal);
 
 
         iv_deck.setVisibility(View.INVISIBLE);
@@ -168,7 +161,6 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         iv_card3.setVisibility(View.INVISIBLE);
         iv_card4.setVisibility(View.INVISIBLE);
         cardSwap.setVisibility(View.INVISIBLE);
-        //cardFinal.setVisibility(View.INVISIBLE);
 
         cards = new ArrayList<>();
 
@@ -250,13 +242,11 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 assignImages(card2, iv_card2);
                 assignImages(card3, iv_card3);
                 assignImages(card4, iv_card4);
-                //assignImages(cards.get(4), cardSwap);
 
                 iv_card1.setVisibility(View.VISIBLE);
                 iv_card2.setVisibility(View.VISIBLE);
                 iv_card3.setVisibility(View.VISIBLE);
                 iv_card4.setVisibility(View.VISIBLE);
-                //cardSwap.setVisibility(View.VISIBLE);
 
                 //remove selected cards from arraylist
                 cards.remove(cards.indexOf(card1));
@@ -283,58 +273,6 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     cards.remove(cards.indexOf(tempCard4));
                 }
 
-//                if(finalPlayerCounts>0) {
-//
-//                    card5 = cards.get(4);
-//                    card6 = cards.get(5);
-//                    card7 = cards.get(6);
-//                    card8 = cards.get(7);
-//
-//                    new Thread(new Thread3("Player1 card1 " + card5)).start();
-//                    new Thread(new Thread3("Player1 card2 " + card6)).start();
-//                    new Thread(new Thread3("Player1 card3 " + card7)).start();
-//                    new Thread(new Thread3("Player1 card4 " + card8)).start();
-//
-//                    cards.remove(cards.indexOf(card5));
-//                    cards.remove(cards.indexOf(card6));
-//                    cards.remove(cards.indexOf(card7));
-//                    cards.remove(cards.indexOf(card8));
-//                }
-//
-//                if(finalPlayerCounts>1) {
-//                    card9 = cards.get(8);
-//                    card10 = cards.get(9);
-//                    card11 = cards.get(10);
-//                    card12 = cards.get(11);
-//
-//                    new Thread(new Thread3("Player2 card1 " + card9)).start();
-//                    new Thread(new Thread3("Player2 card2 " + card10)).start();
-//                    new Thread(new Thread3("Player2 card3 " + card11)).start();
-//                    new Thread(new Thread3("Player2 card4 " + card12)).start();
-//
-//                    cards.remove(cards.indexOf(card9));
-//                    cards.remove(cards.indexOf(card10));
-//                    cards.remove(cards.indexOf(card11));
-//                    cards.remove(cards.indexOf(card12));
-//                }
-//
-//                if(finalPlayerCounts>2) {
-//                    card13 = cards.get(12);
-//                    card14 = cards.get(13);
-//                    card15 = cards.get(14);
-//                    card16 = cards.get(15);
-//
-//                    new Thread(new Thread3("Player3 card1 " + card13)).start();
-//                    new Thread(new Thread3("Player3 card2 " + card14)).start();
-//                    new Thread(new Thread3("Player3 card3 " + card15)).start();
-//                    new Thread(new Thread3("Player3 card4 " + card16)).start();
-//
-//                    cards.remove(cards.indexOf(card13));
-//                    cards.remove(cards.indexOf(card14));
-//                    cards.remove(cards.indexOf(card15));
-//                    cards.remove(cards.indexOf(card16));
-//                }
-
                 startButton.setVisibility(View.INVISIBLE);
 
             }
@@ -349,17 +287,8 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 {
                     singleCard = cards.get(0);
                 }
-                //assignImages(cards.get(0), iv_card1);
-                //assignImages(cards.get(1), iv_card2);
-                //assignImages(cards.get(2), iv_card3);
-                //assignImages(cards.get(3), iv_card4);
-                //assigning cardSwap with image from singleCard
-                assignImages(singleCard, cardSwap);
 
-                //iv_card1.setVisibility(View.VISIBLE);
-                //iv_card2.setVisibility(View.VISIBLE);
-                //iv_card3.setVisibility(View.VISIBLE);
-                //iv_card4.setVisibility(View.VISIBLE);
+                assignImages(singleCard, cardSwap);
                 cardSwap.setVisibility(View.VISIBLE);
 
             }
@@ -371,8 +300,6 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 //if its clicked on and swap status is true, then swap the card
                 if(swapStatus)
                 {
-                    //cardSwap.setVisibility(View.INVISIBLE);
-                    //cardSwap.setVisibility(View.VISIBLE);
                     assignImages(card1, cardSwap);
                     assignImages(singleCard, iv_card1);
                     new Thread(new Thread3("Player1 cardS "+card1)).start();

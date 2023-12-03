@@ -104,7 +104,6 @@ public class MainActivity2 extends AppCompatActivity {
         swapButton = (Button) findViewById(R.id.swapButton);
         passButton = (Button) findViewById(R.id.passButton);
         spoons = (Button) findViewById(R.id.button5);
-        //cardFinal = (ImageView) findViewById(R.id.cardFinal);
 
         playerDisplay = (TextView) findViewById(R.id.textView2);
 
@@ -119,7 +118,6 @@ public class MainActivity2 extends AppCompatActivity {
         iv_card3.setVisibility(View.INVISIBLE);
         iv_card4.setVisibility(View.INVISIBLE);
         cardSwap.setVisibility(View.INVISIBLE);
-        //cardFinal.setVisibility(View.INVISIBLE);
 
         cards = new ArrayList<>();
 
@@ -187,8 +185,6 @@ public class MainActivity2 extends AppCompatActivity {
                 //if its clicked on and swap status is true, then swap the card
                 if(swapStatus)
                 {
-                    //cardSwap.setVisibility(View.INVISIBLE);
-                    //cardSwap.setVisibility(View.VISIBLE);
                     assignImages(card1, cardSwap);
                     assignImages(singleCard, iv_card1);
                     new Thread(new MainActivity2.Thread3("Player"+nextPlayer+" cardS " + card1)).start();
@@ -343,30 +339,28 @@ public class MainActivity2 extends AppCompatActivity {
                     if(message.startsWith("server: Player") || message.startsWith("client: Player")) {
                         int playerNum = Integer.parseInt(message.substring(14,15));
                         int cardVal = Integer.parseInt(message.substring(22, message.length() - 1));
-
+                        String msg = message.substring(16, 21);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (playerId == playerNum && message.substring(16, 21).equals("card1")) {
-                                    card1 = cardVal;
-                                    assignImages(card1, iv_card1);
-                                }else if (playerId == playerNum && message.substring(16, 21).equals("card2")) {
-                                    card2 = cardVal;
-                                    assignImages(card2, iv_card2);
-                                }else if (playerId == playerNum && message.substring(16, 21).equals("card3")) {
-                                    card3 = cardVal;
-                                    assignImages(card3, iv_card3);
-                                }else if (playerId == playerNum && message.substring(16, 21).equals("card4")) {
-                                    card4 = cardVal;
-                                    assignImages(card4, iv_card4);
-                                }else if (playerId == playerNum && message.substring(16, 21).equals("cardS")) {
-                                    singleCard = cardVal;
-                                    cardSwap.setVisibility(View.VISIBLE);
-                                    assignImages(singleCard, cardSwap);
-                                }else if (playerId == playerNum && message.substring(16, 21).equals("cardP")) {
-                                    singleCard = cardVal;
-                                    cardSwap.setVisibility(View.VISIBLE);
-                                    assignImages(singleCard, cardSwap);
+                                if(playerId==playerNum) {
+                                    if (msg.equals("card1")) {
+                                        card1 = cardVal;
+                                        assignImages(card1, iv_card1);
+                                    } else if (msg.equals("card2")) {
+                                        card2 = cardVal;
+                                        assignImages(card2, iv_card2);
+                                    } else if (msg.equals("card3")) {
+                                        card3 = cardVal;
+                                        assignImages(card3, iv_card3);
+                                    } else if (msg.equals("card4")) {
+                                        card4 = cardVal;
+                                        assignImages(card4, iv_card4);
+                                    } else if (msg.equals("cardS") || msg.equals("cardP")) {
+                                        singleCard = cardVal;
+                                        cardSwap.setVisibility(View.VISIBLE);
+                                        assignImages(singleCard, cardSwap);
+                                    }
                                 }
                             }
                         });
