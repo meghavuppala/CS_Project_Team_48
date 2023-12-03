@@ -43,7 +43,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
     Button startGame;
     public static String SERVER_IP = "";
     public static final int SERVER_PORT = 44444;
-    public static final int MAX_PLAYERS = 3;
+    public static final int MAX_PLAYERS = 4;
     String message;
     private int playerCounter = 0;
 
