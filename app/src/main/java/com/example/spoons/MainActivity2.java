@@ -55,6 +55,8 @@ public class MainActivity2 extends AppCompatActivity {
 
     TextView playerDisplay;
 
+    int nextPlayer = 0;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,9 +191,7 @@ public class MainActivity2 extends AppCompatActivity {
                     //cardSwap.setVisibility(View.VISIBLE);
                     assignImages(card1, cardSwap);
                     assignImages(singleCard, iv_card1);
-                    if(playerId==1) {
-                        new Thread(new MainActivity2.Thread3("Player2 cardS " + card1)).start();
-                    }
+                    new Thread(new MainActivity2.Thread3("Player"+nextPlayer+" cardS " + card1)).start();
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -209,9 +209,7 @@ public class MainActivity2 extends AppCompatActivity {
                 {
                     assignImages(card2, cardSwap);
                     assignImages(singleCard, iv_card2);
-                    if(playerId==1) {
-                        new Thread(new MainActivity2.Thread3("Player2 cardS " + card2)).start();
-                    }
+                    new Thread(new MainActivity2.Thread3("Player"+nextPlayer+" cardS " + card2)).start();
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -228,9 +226,7 @@ public class MainActivity2 extends AppCompatActivity {
                 {
                     assignImages(card3, cardSwap);
                     assignImages(singleCard, iv_card3);
-                    if(playerId==1) {
-                        new Thread(new MainActivity2.Thread3("Player2 cardS " + card3)).start();
-                    }
+                    new Thread(new MainActivity2.Thread3("Player"+nextPlayer+" cardS " + card3)).start();
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -248,9 +244,7 @@ public class MainActivity2 extends AppCompatActivity {
                 {
                     assignImages(card4, cardSwap);
                     assignImages(singleCard, iv_card4);
-                    if(playerId==1) {
-                        new Thread(new MainActivity2.Thread3("Player2 cardS " + card4)).start();
-                    }
+                    new Thread(new MainActivity2.Thread3("Player"+nextPlayer+" cardS " + card4)).start();
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -276,9 +270,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View view) {
                 cardSwap.setVisibility(View.INVISIBLE);
                 //card is passed to next person
-                if(playerId==1) {
-                    new Thread(new MainActivity2.Thread3("Player2 cardP " + singleCard)).start();
-                }
+                new Thread(new MainActivity2.Thread3("Player"+nextPlayer+" cardP " + singleCard)).start();
                 cards.remove(cards.indexOf(singleCard));
             }
         });
@@ -313,9 +305,6 @@ public class MainActivity2 extends AppCompatActivity {
                 try {
                     final String message = input.readLine();
                     if(message.equals("server: Host started the game ")){
-//                        Intent intentStartPlayerGame = new Intent(MainActivity2.this, PlayerViewActivity.class);
-//                        intentStartPlayerGame.putExtra("playerId",playerId);
-//                        startActivity(intentStartPlayerGame);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -384,6 +373,7 @@ public class MainActivity2 extends AppCompatActivity {
                     }
                     if (message != null && message.startsWith("server: You are player ")) {
                         playerId = Integer.parseInt(message.substring("server: You are player ".length()));
+                        nextPlayer = playerId+1;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -429,7 +419,6 @@ public class MainActivity2 extends AppCompatActivity {
         }
     }
 
-    //-----------------------------------------------------------------------------------------------
     public void assignImages(int card, ImageView image) {
         switch (card) {
             //Diamonds
