@@ -64,6 +64,8 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
 
     boolean swapStatus = false;
 
+    int finalPlayerCounts;
+
     int card1 = 0;
     int card2 = 0;
     int card3 = 0;
@@ -78,6 +80,11 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
     int card10 = 0;
     int card11 = 0;
     int card12 = 0;
+
+    int card13 = 0;
+    int card14 = 0;
+    int card15 = 0;
+    int card16 = 0;
 
 
     @Override
@@ -239,27 +246,6 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 card3 = cards.get(2);
                 card4 = cards.get(3);
 
-                card5 = cards.get(4);
-                card6 = cards.get(5);
-                card7 = cards.get(6);
-                card8 = cards.get(7);
-
-                new Thread(new Thread3("Player1 card1 "+card5)).start();
-                new Thread(new Thread3("Player1 card2 "+card6)).start();
-                new Thread(new Thread3("Player1 card3 "+card7)).start();
-                new Thread(new Thread3("Player1 card4 "+card8)).start();
-
-
-                card9 = cards.get(8);
-                card10 = cards.get(9);
-                card11 = cards.get(10);
-                card12 = cards.get(11);
-
-                new Thread(new Thread3("Player2 card1 "+card9)).start();
-                new Thread(new Thread3("Player2 card2 "+card10)).start();
-                new Thread(new Thread3("Player2 card3 "+card11)).start();
-                new Thread(new Thread3("Player2 card4 "+card12)).start();
-
                 assignImages(card1, iv_card1);
                 assignImages(card2, iv_card2);
                 assignImages(card3, iv_card3);
@@ -278,15 +264,76 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 cards.remove(cards.indexOf(card3));
                 cards.remove(cards.indexOf(card4));
 
-                cards.remove(cards.indexOf(card5));
-                cards.remove(cards.indexOf(card6));
-                cards.remove(cards.indexOf(card7));
-                cards.remove(cards.indexOf(card8));
+                int tempIndex = 4;
+                for(int i = 1; i<=finalPlayerCounts; i++){
+                    int tempCard1 = cards.get(tempIndex);
+                    int tempCard2 = cards.get(tempIndex+1);
+                    int tempCard3 = cards.get(tempIndex+2);
+                    int tempCard4 = cards.get(tempIndex+3);
+                    tempIndex++;
 
-                cards.remove(cards.indexOf(card9));
-                cards.remove(cards.indexOf(card10));
-                cards.remove(cards.indexOf(card11));
-                cards.remove(cards.indexOf(card12));
+                    new Thread(new Thread3("Player"+i+" card1 "+tempCard1)).start();
+                    new Thread(new Thread3("Player"+i+" card2 "+tempCard2)).start();
+                    new Thread(new Thread3("Player"+i+" card3 "+tempCard3)).start();
+                    new Thread(new Thread3("Player"+i+" card4 "+tempCard4)).start();
+
+                    cards.remove(cards.indexOf(tempCard1));
+                    cards.remove(cards.indexOf(tempCard2));
+                    cards.remove(cards.indexOf(tempCard3));
+                    cards.remove(cards.indexOf(tempCard4));
+                }
+
+//                if(finalPlayerCounts>0) {
+//
+//                    card5 = cards.get(4);
+//                    card6 = cards.get(5);
+//                    card7 = cards.get(6);
+//                    card8 = cards.get(7);
+//
+//                    new Thread(new Thread3("Player1 card1 " + card5)).start();
+//                    new Thread(new Thread3("Player1 card2 " + card6)).start();
+//                    new Thread(new Thread3("Player1 card3 " + card7)).start();
+//                    new Thread(new Thread3("Player1 card4 " + card8)).start();
+//
+//                    cards.remove(cards.indexOf(card5));
+//                    cards.remove(cards.indexOf(card6));
+//                    cards.remove(cards.indexOf(card7));
+//                    cards.remove(cards.indexOf(card8));
+//                }
+//
+//                if(finalPlayerCounts>1) {
+//                    card9 = cards.get(8);
+//                    card10 = cards.get(9);
+//                    card11 = cards.get(10);
+//                    card12 = cards.get(11);
+//
+//                    new Thread(new Thread3("Player2 card1 " + card9)).start();
+//                    new Thread(new Thread3("Player2 card2 " + card10)).start();
+//                    new Thread(new Thread3("Player2 card3 " + card11)).start();
+//                    new Thread(new Thread3("Player2 card4 " + card12)).start();
+//
+//                    cards.remove(cards.indexOf(card9));
+//                    cards.remove(cards.indexOf(card10));
+//                    cards.remove(cards.indexOf(card11));
+//                    cards.remove(cards.indexOf(card12));
+//                }
+//
+//                if(finalPlayerCounts>2) {
+//                    card13 = cards.get(12);
+//                    card14 = cards.get(13);
+//                    card15 = cards.get(14);
+//                    card16 = cards.get(15);
+//
+//                    new Thread(new Thread3("Player3 card1 " + card13)).start();
+//                    new Thread(new Thread3("Player3 card2 " + card14)).start();
+//                    new Thread(new Thread3("Player3 card3 " + card15)).start();
+//                    new Thread(new Thread3("Player3 card4 " + card16)).start();
+//
+//                    cards.remove(cards.indexOf(card13));
+//                    cards.remove(cards.indexOf(card14));
+//                    cards.remove(cards.indexOf(card15));
+//                    cards.remove(cards.indexOf(card16));
+//                }
 
                 startButton.setVisibility(View.INVISIBLE);
 
@@ -450,7 +497,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     output.println("server: You are player " + playerId);
 
                     playerCounts++;
-                    int finalPlayerCounts = playerCounts;
+                    finalPlayerCounts = playerCounts;
                     runOnUiThread(() -> {
                         tvMessages.setText("Connected: " + finalPlayerCounts + " players\n");
                     });
