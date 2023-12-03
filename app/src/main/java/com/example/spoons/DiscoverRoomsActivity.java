@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -62,6 +63,8 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
     boolean swapStatus = false;
 
     int finalPlayerCounts;
+
+    int myId = 0;
 
     int card1 = 0;
     int card2 = 0;
@@ -303,6 +306,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     assignImages(card1, cardSwap);
                     assignImages(singleCard, iv_card1);
                     new Thread(new Thread3("Player1 cardS "+card1)).start();
+                    card1 = singleCard;
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -323,6 +327,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     assignImages(card2, cardSwap);
                     assignImages(singleCard, iv_card2);
                     new Thread(new Thread3("Player1 cardS "+card2)).start();
+                    card2 = singleCard;
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -340,6 +345,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     assignImages(card3, cardSwap);
                     assignImages(singleCard, iv_card3);
                     new Thread(new Thread3("Player1 cardS "+card3)).start();
+                    card3 = singleCard;
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -358,6 +364,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     assignImages(card4, cardSwap);
                     assignImages(singleCard, iv_card4);
                     new Thread(new Thread3("Player1 cardS "+card4)).start();
+                    card4 = singleCard;
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -388,7 +395,43 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             }
         });
 
+        spoons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkWinningCondition()) {
+                    Toast.makeText(DiscoverRoomsActivity.this, "Congratulations! You won!", Toast.LENGTH_LONG).show();
+                    new Thread(new DiscoverRoomsActivity.Thread3("Player0 cardW "+singleCard)).start();
+                    Intent intentTutorial = new Intent(DiscoverRoomsActivity.this, WinningPageActivity.class);
+                    startActivity(intentTutorial);
+                } else {
+                    Toast.makeText(DiscoverRoomsActivity.this, "Not the winning move!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
+    }
+
+    private boolean checkWinningCondition() {
+        // Debug prints
+        System.out.println("Card 1: " + card1);
+        System.out.println("Card 2: " + card2);
+        System.out.println("Card 3: " + card3);
+        System.out.println("Card 4: " + card4);
+        boolean var = false;
+        int value1 = (card1 % 13);
+        int value2 = (card2 % 13);
+        int value3 = (card3 % 13);
+        int value4 = (card4 % 13);
+        //  Toast.makeText(DiscoverRoomsActivity.this, value1 + " " +value2 + " " + value3 + " " + value4 , Toast.LENGTH_LONG).show();
+
+
+
+        if ((value1 == value2) && (value2 == value3) && (value3 == value4)) {
+            var = true;
+        } else {
+            var = false;
+        }
+        return var;
     }
 
     private String getLocalIpAddress() throws UnknownHostException {
@@ -465,6 +508,23 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             while (true) {
                 try {
                     final String message = input.readLine();
+
+                    if(message.startsWith("Player")) {
+                        int playerNum = Integer.parseInt(message.substring(6,7));
+                        String msg = message.substring(8,13);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(myId!=playerNum){
+                                    if(msg.equals("cardW")) {
+                                        Toast.makeText(DiscoverRoomsActivity.this, "You lost!", Toast.LENGTH_SHORT).show();
+                                        Intent intentLoose = new Intent(DiscoverRoomsActivity.this, LoosingPageActivity.class);
+                                        startActivity(intentLoose);
+                                    }
+                                }
+                            }
+                        });
+                    }
                     if (message != null) {
                         broadcastToAll("client: " + message+" "); // Broadcast the received message to all clients
                         runOnUiThread(() -> {
@@ -513,162 +573,162 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
     public void assignImages(int card, ImageView image) {
         switch (card) {
             //Diamonds
-            case 1:
+            case 0:
                 image.setImageResource(R.drawable.ace_of_diamonds);
                 break;
-            case 2:
+            case 1:
                 image.setImageResource(R.drawable.two_of_diamonds);
                 break;
-            case 3:
+            case 2:
                 image.setImageResource(R.drawable.three_of_diamonds);
                 break;
-            case 4:
+            case 3:
                 image.setImageResource(R.drawable.four_of_diamonds);
                 break;
-            case 5:
+            case 4:
                 image.setImageResource(R.drawable.five_of_diamonds);
                 break;
-            case 6:
+            case 5:
                 image.setImageResource(R.drawable.six_of_diamonds);
                 break;
-            case 7:
+            case 6:
                 image.setImageResource(R.drawable.seven_of_diamonds);
                 break;
-            case 8:
+            case 7:
                 image.setImageResource(R.drawable.eight_of_diamonds);
                 break;
-            case 9:
+            case 8:
                 image.setImageResource(R.drawable.nine_of_diamonds);
                 break;
-            case 10:
+            case 9:
                 image.setImageResource(R.drawable.ten_of_diamonds);
                 break;
-            case 11:
+            case 10:
                 image.setImageResource(R.drawable.jack_of_diamonds2);
                 break;
-            case 12:
+            case 11:
                 image.setImageResource(R.drawable.queen_of_diamonds2);
                 break;
-            case 13:
+            case 12:
                 image.setImageResource(R.drawable.king_of_diamonds2);
                 break;
             //Spades
-            case 14:
+            case 13:
                 image.setImageResource(R.drawable.ace_of_spades2);
                 break;
-            case 15:
+            case 14:
                 image.setImageResource(R.drawable.two_of_spades);
                 break;
-            case 16:
+            case 15:
                 image.setImageResource(R.drawable.three_of_spades);
                 break;
-            case 17:
+            case 16:
                 image.setImageResource(R.drawable.four_of_spades);
                 break;
-            case 18:
+            case 17:
                 image.setImageResource(R.drawable.five_of_spades);
                 break;
-            case 19:
+            case 18:
                 image.setImageResource(R.drawable.six_of_spades);
                 break;
-            case 20:
+            case 19:
                 image.setImageResource(R.drawable.seven_of_spades);
                 break;
-            case 21:
+            case 20:
                 image.setImageResource(R.drawable.eight_of_spades);
                 break;
-            case 22:
+            case 21:
                 image.setImageResource(R.drawable.nine_of_spades);
                 break;
-            case 23:
+            case 22:
                 image.setImageResource(R.drawable.ten_of_spades);
                 break;
-            case 24:
+            case 23:
                 image.setImageResource(R.drawable.jack_of_spades2);
                 break;
-            case 25:
+            case 24:
                 image.setImageResource(R.drawable.queen_of_spades2);
                 break;
-            case 26:
+            case 25:
                 image.setImageResource(R.drawable.king_of_spades2);
                 break;
             //Clubs
-            case 27:
+            case 26:
                 image.setImageResource(R.drawable.ace_of_clubs);
                 break;
-            case 28:
+            case 27:
                 image.setImageResource(R.drawable.two_of_clubs);
                 break;
-            case 29:
+            case 28:
                 image.setImageResource(R.drawable.three_of_clubs);
                 break;
-            case 30:
+            case 29:
                 image.setImageResource(R.drawable.four_of_clubs);
                 break;
-            case 31:
+            case 30:
                 image.setImageResource(R.drawable.five_of_clubs);
                 break;
-            case 32:
+            case 31:
                 image.setImageResource(R.drawable.six_of_clubs);
                 break;
-            case 33:
+            case 32:
                 image.setImageResource(R.drawable.seven_of_clubs);
                 break;
-            case 34:
+            case 33:
                 image.setImageResource(R.drawable.eight_of_clubs);
                 break;
-            case 35:
+            case 34:
                 image.setImageResource(R.drawable.nine_of_clubs);
                 break;
-            case 36:
+            case 35:
                 image.setImageResource(R.drawable.ten_of_clubs);
                 break;
-            case 37:
+            case 36:
                 image.setImageResource(R.drawable.jack_of_clubs2);
                 break;
-            case 38:
+            case 37:
                 image.setImageResource(R.drawable.queen_of_clubs2);
                 break;
-            case 39:
+            case 38:
                 image.setImageResource(R.drawable.king_of_clubs2);
                 break;
-            case 40:
+            case 39:
                 image.setImageResource(R.drawable.ace_of_hearts);
                 break;
-            case 41:
+            case 40:
                 image.setImageResource(R.drawable.two_of_hearts);
                 break;
-            case 42:
+            case 41:
                 image.setImageResource(R.drawable.three_of_hearts);
                 break;
-            case 43:
+            case 42:
                 image.setImageResource(R.drawable.four_of_hearts);
                 break;
-            case 44:
+            case 43:
                 image.setImageResource(R.drawable.five_of_hearts);
                 break;
-            case 45:
+            case 44:
                 image.setImageResource(R.drawable.six_of_hearts);
                 break;
-            case 46:
+            case 45:
                 image.setImageResource(R.drawable.seven_of_hearts);
                 break;
-            case 47:
+            case 46:
                 image.setImageResource(R.drawable.eight_of_hearts);
                 break;
-            case 48:
+            case 47:
                 image.setImageResource(R.drawable.nine_of_hearts);
                 break;
-            case 49:
+            case 48:
                 image.setImageResource(R.drawable.ten_of_hearts);
                 break;
-            case 50:
+            case 49:
                 image.setImageResource(R.drawable.jack_of_hearts2);
                 break;
-            case 51:
+            case 50:
                 image.setImageResource(R.drawable.queen_of_hearts2);
                 break;
-            case 52:
+            case 51:
                 image.setImageResource(R.drawable.king_of_hearts2);
                 break;
         }
