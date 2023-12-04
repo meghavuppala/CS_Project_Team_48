@@ -13,8 +13,10 @@
         android:layout_height="65dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="85dp"
         android:background="#000000"
         android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton6"
         app:srcCompat="@drawable/newtutorial" />
@@ -25,8 +27,10 @@
         android:layout_height="65dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="21dp"
+        android:layout_marginEnd="85dp"
         android:background="#000000"
         android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/newstartgame" />
@@ -37,7 +41,9 @@
         android:layout_height="77dp"
         android:layout_marginStart="59dp"
         android:layout_marginTop="258dp"
+        android:layout_marginEnd="59dp"
         android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/new_game__7_2" />
