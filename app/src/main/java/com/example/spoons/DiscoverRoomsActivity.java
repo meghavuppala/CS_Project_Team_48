@@ -1,13 +1,11 @@
 package com.example.spoons;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.WindowDecorActionBar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -446,47 +444,46 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                serverSocket = new ServerSocket(SERVER_PORT);
+                serverSocket = new ServerSocket(SERVER_PORT);   //creating a new socket for the host, used for communication with players
                 runOnUiThread(() -> {
-                    tvMessages.setText("Not connected");
-                    tvIP.setText("IP: " + SERVER_IP);
-                    tvPort.setText("Port: " + SERVER_PORT);
+                    tvMessages.setText("Not connected");    //displaying connectivity status of host and players
+                    tvIP.setText("IP: " + SERVER_IP);   //displaying the IP address of the server
+                    tvPort.setText("Port: " + SERVER_PORT); //displaying the port to connect to host
                 });
-                int playerCounts = 0;
 
-                while (playerCounts < MAX_PLAYERS) { // Keep listening for new connections
-                    Socket socket = serverSocket.accept();
-                    PrintWriter output = new PrintWriter(socket.getOutputStream(), true); // Auto-flush set to true
-                    BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    playerOutputs.add(output);
+                int playerCounts = 0;   //variable to keep track of the number of players connected
 
-                    // Assign a unique identifier to the player
-                    int playerId = ++playerCounter;
+                while (playerCounts < MAX_PLAYERS) {
+                    Socket socket = serverSocket.accept();  //creating a socket for each player for communication
+                    PrintWriter output = new PrintWriter(socket.getOutputStream(), true);   //writing data to the socket ouput
+                    BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));  //keeps track of the input data from the socket
+                    playerOutputs.add(output);  //adds the sent output to the playerOutputs
 
-                    // Notify clients about the player identifier
-                    output.println("server: You are player " + playerId);
+                    int playerId = ++playerCounter; //variable to create a unique ID for each connected player
+
+                    output.println("server: You are player " + playerId);   //sending a message to the player to assign their uniqueID
 
                     playerCounts++;
-                    finalPlayerCounts = playerCounts;
+                    finalPlayerCounts = playerCounts;   //updating the finalPlayerCounts for the host to keep track of total players
+
                     runOnUiThread(() -> {
-                        tvMessages.setText("Connected: " + finalPlayerCounts + " players\n");
+                        tvMessages.setText("Connected: " + finalPlayerCounts + " players\n");   //updating the display on host screen to show number of connected players
                     });
 
+                    //Sending a message to all players that player limit has reached and host can begin game
                     if (playerCounts == MAX_PLAYERS) {
-                        // Notify clients that the game can start or perform any other necessary actions
-                        // Example: broadcast a message to all players
-                        broadcastToAll("All players connected. Game can start!");
+                        broadcastToPlayers("All players connected. Game can start!");
                     }
 
-                    new Thread(new Thread2(input, playerId)).start();
+                    new Thread(new Thread2(input, playerId)).start();   //creating a thread to listen for player activity
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        // Method to broadcast a message to all connected players
-        private void broadcastToAll(String message) {
+        //function to send messages to all connected players
+        private void broadcastToPlayers(String message) {
             for (PrintWriter playerOutput : playerOutputs) {
                 playerOutput.println(message);
                 playerOutput.flush();
@@ -494,6 +491,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         }
     }
 
+    //Thread listens for activity from the players
     private class Thread2 implements Runnable {
         private BufferedReader input;
         private int playerId;
@@ -508,14 +506,15 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             while (true) {
                 try {
                     final String message = input.readLine();
-
+                    //Checking for game functionality messages that start with player
                     if(message.startsWith("Player")) {
-                        int playerNum = Integer.parseInt(message.substring(6,7));
-                        String msg = message.substring(8,13);
+                        int playerNum = Integer.parseInt(message.substring(6,7));   //interpretting the message to find which player the message is intended for
+                        String msg = message.substring(8,13);   //interpretting the message to find the intented game functionality like winning move detected
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 if(myId!=playerNum){
+                                    //checking to see if a different player won the game, and redirecting user to the lost game screen
                                     if(msg.equals("cardW")) {
                                         Toast.makeText(DiscoverRoomsActivity.this, "You lost!", Toast.LENGTH_SHORT).show();
                                         Intent intentLoose = new Intent(DiscoverRoomsActivity.this, LoosingPageActivity.class);
@@ -525,12 +524,13 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                             }
                         });
                     }
+                    //Listening for messages from players, and broadcasting the message to all the players connected
                     if (message != null) {
-                        broadcastToAll("client: " + message+" "); // Broadcast the received message to all clients
+                        broadcastToPlayers("client: " + message+" "); // Broadcast the received message to all clients
                         runOnUiThread(() -> {
                             tvMessages.append("client: " + message + "\n");
                         });
-                    } else {
+                    } else {    //No message content has been sent
                         Thread1 = new Thread(new Thread1());
                         Thread1.start();
                         return;
@@ -543,25 +543,26 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
     }
 
 
+    //Thread sends activity to players
     class Thread3 implements Runnable {
         private String message;
 
         Thread3(String message) {
-            this.message = message;
+            this.message = message;  //updating the message to be sent to players, message is passed during thread creation
         }
 
         @Override
         public void run() {
-            broadcastToAll("server: " + message + " ");
+            broadcastToPlayers("server: " + message + " "); //sending the desired message to all the players
             runOnUiThread(() -> {
-                tvMessages.append("You: " + message + " ");
-                etMessage.setText("");
+                tvMessages.append("You: " + message + " "); //messages are displayed on the connectivity screen
+                etMessage.setText("");  //text box is cleared after message is sent
             });
         }
     }
 
-    // Method to broadcast a message to all connected players
-    private void broadcastToAll(String message) {
+    // Function to broadcast a message to all connected players
+    private void broadcastToPlayers(String message) {
         for (PrintWriter playerOutput : playerOutputs) {
             playerOutput.println(message);
             playerOutput.flush();

@@ -322,90 +322,95 @@ public class MainActivity2 extends AppCompatActivity {
         public void run() {
             Socket socket;
             try {
-                socket = new Socket(SERVER_IP, SERVER_PORT);
-                output = new PrintWriter(socket.getOutputStream(), true); // Auto-flush set to true
-                input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                socket = new Socket(SERVER_IP, SERVER_PORT);    //creating a new socket for the player, used for communication with host
+                output = new PrintWriter(socket.getOutputStream(), true);   //writing data to the socket ouput
+                input = new BufferedReader(new InputStreamReader(socket.getInputStream())); //keeps track of the input data from the socket
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        tvMessages.setText("Connected\n");
+                        tvMessages.setText("Connected\n");  //updating the display to show that the player has been connected to host
                     }
                 });
-                new Thread(new Thread2()).start();
+                new Thread(new Thread2()).start();  //creating a thread to listen for activity from host
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
+    //Thread listens to activity from host
     class Thread2 implements Runnable {
         @Override
         public void run() {
             while (true) {
                 try {
                     final String message = input.readLine();
+                    //Listening to see if the host starts the game
                     if(message.equals("server: Host started the game ")){
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                // Update UI components here
+                                //Once the host starts the game, the game functionality buttons are visible for player
                                 swapButton.setVisibility(View.VISIBLE);
                                 passButton.setVisibility(View.VISIBLE);
                                 spoons.setVisibility(View.VISIBLE);
                                 playerDisplay.setVisibility(View.VISIBLE);
-
+                                //Once the host starts the game, the connectivity functionality disappears from the screen
                                 etIP.setVisibility(View.INVISIBLE);
                                 etPort.setVisibility(View.INVISIBLE);
                                 tvMessages.setVisibility(View.INVISIBLE);
                                 etMessage.setVisibility(View.INVISIBLE);
                                 btnSend.setVisibility(View.INVISIBLE);
                                 btnConnect.setVisibility(View.INVISIBLE);
-
-
                             }
                         });
                     }
-
+                    //Listening to see if the host started dealing the four random cards
                     if(message.equals("server: Game Has Started ")){
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                //Making the four cards on screen visible since the host dealt the cards
                                 iv_card1.setVisibility(View.VISIBLE);
                                 iv_card2.setVisibility(View.VISIBLE);
                                 iv_card3.setVisibility(View.VISIBLE);
                                 iv_card4.setVisibility(View.VISIBLE);
-
-
                             }
                         });
                     }
-
+                    //Listening for game functionality messages that are formatted to start with the word Player
                     if(message.startsWith("server: Player") || message.startsWith("client: Player")) {
-                        int playerNum = Integer.parseInt(message.substring(14,15));
-                        int cardVal = Integer.parseInt(message.substring(22, message.length() - 1));
-                        String msg = message.substring(16, 21);
+                        int playerNum = Integer.parseInt(message.substring(14,15)); //interpretting the message to find which player the message is intended for
+                        int cardVal = Integer.parseInt(message.substring(22, message.length() - 1)); //interpretting the message to find the card value sent
+                        String msg = message.substring(16, 21); //interpretting the message to find the intented game functionality like card assignment, card pass, etc
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 if(playerId==playerNum) {
                                     if (msg.equals("card1")) {
+                                        //Assigns the first random card to the player received from the host
                                         card1 = cardVal;
                                         assignImages(card1, iv_card1);
                                     } else if (msg.equals("card2")) {
+                                        //Assigns the second random card to the player received from the host
                                         card2 = cardVal;
                                         assignImages(card2, iv_card2);
                                     } else if (msg.equals("card3")) {
+                                        //Assigns the third random card to the player received from the host
                                         card3 = cardVal;
                                         assignImages(card3, iv_card3);
                                     } else if (msg.equals("card4")) {
+                                        //Assigns the fourth random card to the player received from the host
                                         card4 = cardVal;
                                         assignImages(card4, iv_card4);
                                     } else if (msg.equals("cardS") || msg.equals("cardP")) {
-                                        singleCard = cardVal;
+                                        //Assigns the main card to the player received from the host to pass or swap
+                                         singleCard = cardVal;
                                         cardSwap.setVisibility(View.VISIBLE);
                                         assignImages(singleCard, cardSwap);
                                     }
                                 }else if(playerId!=playerNum){
+                                    //checking to see if a different player won the game, and redirecting user to the lost game screen
                                     if(msg.equals("cardW")) {
                                         Toast.makeText(MainActivity2.this, "You lost!", Toast.LENGTH_SHORT).show();
                                         Intent intentLoose = new Intent(MainActivity2.this, LoosingPageActivity.class);
@@ -415,17 +420,19 @@ public class MainActivity2 extends AppCompatActivity {
                             }
                         });
                     }
+                    //Interpretting the message from host to get the unique playerId
                     if (message != null && message.startsWith("server: You are player ")) {
-                        playerId = Integer.parseInt(message.substring("server: You are player ".length()));
-                        nextPlayer = playerId+1;
+                        playerId = Integer.parseInt(message.substring("server: You are player ".length())); //Interpretting the message to find the playerId sent
+                        nextPlayer = playerId+1;    //calculating the value of the next player to send swapped or passed cards to
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                // Update UI components here
+                                // Updating the unique player number on screen
                                 playerDisplay.setText("Player Number "+playerId);
                             }
                         });
                     }
+                    //Adding the received messages to the messages log
                     if (message != null) {
                         handler.post(new Runnable() {
                             @Override
@@ -433,7 +440,7 @@ public class MainActivity2 extends AppCompatActivity {
                                 tvMessages.append(message + " ");
                             }
                         });
-                    } else {
+                    } else { //No message content has been sent
                         Thread1 = new Thread(new Thread1());
                         Thread1.start();
                         return;
@@ -445,19 +452,20 @@ public class MainActivity2 extends AppCompatActivity {
         }
     }
 
+    //Thread sends activity to host
     class Thread3 implements Runnable {
         private String message;
         Thread3(String message) {
-            this.message = message;
+            this.message = message; //updating the message to be sent to host, message is passed during thread creation
         }
         @Override
         public void run() {
-            output.println(message);
+            output.println(message);    //sending the desired message to the host
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    tvMessages.append("client: " + message+" ");
-                    etMessage.setText("");
+                    tvMessages.append("client: " + message+" ");    //messages are displayed on the connectivity screen
+                    etMessage.setText("");  //text box is cleared after message is sent
                 }
             });
         }
