@@ -32,9 +32,9 @@ import java.util.List;
 public class DiscoverRoomsActivity extends AppCompatActivity {
     ServerSocket serverSocket;
     Thread Thread1 = null;
-    TextView tvIP, tvPort;
-    TextView tvMessages;
-    EditText etMessage;
+    TextView displayIP, displayPort;
+    TextView displayMessages;
+    EditText sendMessage;
     Button btnSend;
     Button startGame;
     public static String SERVER_IP = "";
@@ -60,7 +60,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
 
     boolean swapStatus = false;
 
-    int finalPlayerCounts;
+    int finalPlayerCount;
 
     int myId = 0;
 
@@ -103,20 +103,20 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 passButton.setVisibility(View.VISIBLE);
                 spoons.setVisibility(View.VISIBLE);
 
-                tvIP.setVisibility(View.INVISIBLE);
-                tvPort.setVisibility(View.INVISIBLE);
-                tvMessages.setVisibility(View.INVISIBLE);
-                etMessage.setVisibility(View.INVISIBLE);
+                displayIP.setVisibility(View.INVISIBLE);
+                displayPort.setVisibility(View.INVISIBLE);
+                displayMessages.setVisibility(View.INVISIBLE);
+                sendMessage.setVisibility(View.INVISIBLE);
                 btnSend.setVisibility(View.INVISIBLE);
                 startGame.setVisibility(View.INVISIBLE);
             }
 
         });
 
-        tvIP = findViewById(R.id.tvIP);
-        tvPort = findViewById(R.id.tvPort);
-        tvMessages = findViewById(R.id.tvMessages);
-        etMessage = findViewById(R.id.etMessage);
+        displayIP = findViewById(R.id.tvIP);
+        displayPort = findViewById(R.id.tvPort);
+        displayMessages = findViewById(R.id.tvMessages);
+        sendMessage = findViewById(R.id.etMessage);
         btnSend = findViewById(R.id.btnSend);
         try {
             SERVER_IP = getLocalIpAddress();
@@ -128,7 +128,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                message = etMessage.getText().toString().trim();
+                message = sendMessage.getText().toString().trim();
                 if (!message.isEmpty()) {
                     new Thread(new Thread3(message)).start();
                 }
@@ -256,7 +256,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 cards.remove(cards.indexOf(card4));
 
                 int tempIndex = 4;
-                for(int i = 1; i<=finalPlayerCounts; i++){
+                for(int i = 1; i<= finalPlayerCount; i++){
                     int tempCard1 = cards.get(tempIndex);
                     int tempCard2 = cards.get(tempIndex+1);
                     int tempCard3 = cards.get(tempIndex+2);
@@ -446,36 +446,36 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             try {
                 serverSocket = new ServerSocket(SERVER_PORT);   //creating a new socket for the host, used for communication with players
                 runOnUiThread(() -> {
-                    tvMessages.setText("Not connected");    //displaying connectivity status of host and players
-                    tvIP.setText("IP: " + SERVER_IP);   //displaying the IP address of the server
-                    tvPort.setText("Port: " + SERVER_PORT); //displaying the port to connect to host
+                    displayMessages.setText("Not connected");    //displaying connectivity status of host and players
+                    displayIP.setText("IP: " + SERVER_IP);   //displaying the IP address of the server
+                    displayPort.setText("Port: " + SERVER_PORT); //displaying the port to connect to host
                 });
 
-                int playerCounts = 0;   //variable to keep track of the number of players connected
+                int currPlayerCount = 0;   //variable to keep track of the number of players connected
 
-                while (playerCounts < MAX_PLAYERS) {
+                while (currPlayerCount < MAX_PLAYERS) {
                     Socket socket = serverSocket.accept();  //creating a socket for each player for communication
-                    PrintWriter output = new PrintWriter(socket.getOutputStream(), true);   //writing data to the socket ouput
-                    BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));  //keeps track of the input data from the socket
-                    playerOutputs.add(output);  //adds the sent output to the playerOutputs
+                    PrintWriter hostOutput = new PrintWriter(socket.getOutputStream(), true);   //writing data to the socket ouput
+                    BufferedReader hostInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));  //keeps track of the input data from the socket
+                    playerOutputs.add(hostOutput);  //adds the sent output to the playerOutputs
 
                     int playerId = ++playerCounter; //variable to create a unique ID for each connected player
 
-                    output.println("server: You are player " + playerId);   //sending a message to the player to assign their uniqueID
+                    hostOutput.println("server: You are player " + playerId);   //sending a message to the player to assign their uniqueID
 
-                    playerCounts++;
-                    finalPlayerCounts = playerCounts;   //updating the finalPlayerCounts for the host to keep track of total players
+                    currPlayerCount++;
+                    finalPlayerCount = currPlayerCount;   //updating the finalPlayerCounts for the host to keep track of total players
 
                     runOnUiThread(() -> {
-                        tvMessages.setText("Connected: " + finalPlayerCounts + " players\n");   //updating the display on host screen to show number of connected players
+                        displayMessages.setText("Connected: " + finalPlayerCount + " players\n");   //updating the display on host screen to show number of connected players
                     });
 
                     //Sending a message to all players that player limit has reached and host can begin game
-                    if (playerCounts == MAX_PLAYERS) {
+                    if (currPlayerCount == MAX_PLAYERS) {
                         broadcastToPlayers("All players connected. Game can start!");
                     }
 
-                    new Thread(new Thread2(input, playerId)).start();   //creating a thread to listen for player activity
+                    new Thread(new Thread2(hostInput, playerId)).start();   //creating a thread to listen for player activity
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -528,7 +528,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     if (message != null) {
                         broadcastToPlayers("client: " + message+" "); // Broadcast the received message to all clients
                         runOnUiThread(() -> {
-                            tvMessages.append("client: " + message + "\n");
+                            displayMessages.append("client: " + message + "\n");
                         });
                     } else {    //No message content has been sent
                         Thread1 = new Thread(new Thread1());
@@ -555,8 +555,8 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         public void run() {
             broadcastToPlayers("server: " + message + " "); //sending the desired message to all the players
             runOnUiThread(() -> {
-                tvMessages.append("You: " + message + " "); //messages are displayed on the connectivity screen
-                etMessage.setText("");  //text box is cleared after message is sent
+                displayMessages.append("You: " + message + " "); //messages are displayed on the connectivity screen
+                sendMessage.setText("");  //text box is cleared after message is sent
             });
         }
     }

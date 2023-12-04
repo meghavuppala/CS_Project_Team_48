@@ -23,13 +23,13 @@ import java.util.ArrayList;
 @SuppressLint("SetTextI18n")
 public class MainActivity2 extends AppCompatActivity {
     Thread Thread1 = null;
-    EditText etIP, etPort;
-    TextView tvMessages;
-    EditText etMessage;
-    Button btnSend;
+    EditText hostIP, hostPort;
+    TextView displayMessages;
+    EditText sendMessage;
+    Button sendButton;
     String SERVER_IP;
     int SERVER_PORT;
-    Button btnConnect;
+    Button connectButton;
 
     private PrintWriter output;
     private BufferedReader input;
@@ -64,31 +64,31 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        etIP = findViewById(R.id.etIP);
-        etPort = findViewById(R.id.etPort);
-        tvMessages = findViewById(R.id.tvMessages);
-        etMessage = findViewById(R.id.etMessage);
-        btnSend = findViewById(R.id.btnSend);
-        btnConnect = findViewById(R.id.btnConnect);
+        hostIP = findViewById(R.id.etIP);
+        hostPort = findViewById(R.id.etPort);
+        displayMessages = findViewById(R.id.tvMessages);
+        sendMessage = findViewById(R.id.etMessage);
+        sendButton = findViewById(R.id.btnSend);
+        connectButton = findViewById(R.id.btnConnect);
 
         handler = new Handler(Looper.getMainLooper());
 
-        btnConnect.setOnClickListener(new View.OnClickListener() {
+        connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvMessages.setText("");
-                SERVER_IP = etIP.getText().toString().trim();
-                SERVER_PORT = Integer.parseInt(etPort.getText().toString().trim());
+                displayMessages.setText("");
+                SERVER_IP = hostIP.getText().toString().trim();
+                SERVER_PORT = Integer.parseInt(hostPort.getText().toString().trim());
                 Thread1 = new Thread(new Thread1());
                 Thread1.start();
 
             }
         });
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = etMessage.getText().toString().trim();
+                String message = sendMessage.getText().toString().trim();
                 if (!message.isEmpty()) {
                     new Thread(new Thread3(message)).start();
                 }
@@ -328,7 +328,7 @@ public class MainActivity2 extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        tvMessages.setText("Connected\n");  //updating the display to show that the player has been connected to host
+                        displayMessages.setText("Connected\n");  //updating the display to show that the player has been connected to host
                     }
                 });
                 new Thread(new Thread2()).start();  //creating a thread to listen for activity from host
@@ -356,12 +356,12 @@ public class MainActivity2 extends AppCompatActivity {
                                 spoons.setVisibility(View.VISIBLE);
                                 playerDisplay.setVisibility(View.VISIBLE);
                                 //Once the host starts the game, the connectivity functionality disappears from the screen
-                                etIP.setVisibility(View.INVISIBLE);
-                                etPort.setVisibility(View.INVISIBLE);
-                                tvMessages.setVisibility(View.INVISIBLE);
-                                etMessage.setVisibility(View.INVISIBLE);
-                                btnSend.setVisibility(View.INVISIBLE);
-                                btnConnect.setVisibility(View.INVISIBLE);
+                                hostIP.setVisibility(View.INVISIBLE);
+                                hostPort.setVisibility(View.INVISIBLE);
+                                displayMessages.setVisibility(View.INVISIBLE);
+                                sendMessage.setVisibility(View.INVISIBLE);
+                                sendButton.setVisibility(View.INVISIBLE);
+                                connectButton.setVisibility(View.INVISIBLE);
                             }
                         });
                     }
@@ -437,7 +437,7 @@ public class MainActivity2 extends AppCompatActivity {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                tvMessages.append(message + " ");
+                                displayMessages.append(message + " ");
                             }
                         });
                     } else { //No message content has been sent
@@ -464,8 +464,8 @@ public class MainActivity2 extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    tvMessages.append("client: " + message+" ");    //messages are displayed on the connectivity screen
-                    etMessage.setText("");  //text box is cleared after message is sent
+                    displayMessages.append("client: " + message+" ");    //messages are displayed on the connectivity screen
+                    sendMessage.setText("");  //text box is cleared after message is sent
                 }
             });
         }
