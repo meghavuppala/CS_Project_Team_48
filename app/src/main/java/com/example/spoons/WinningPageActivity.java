@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+//Corresponding java file to the xml of winning page
 public class WinningPageActivity extends AppCompatActivity {
 
     @Override

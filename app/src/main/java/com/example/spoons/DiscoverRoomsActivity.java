@@ -41,7 +41,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
     String message;
     private int playerCounter = 0;
     private List<PrintWriter> playerOutputs = new ArrayList<>();
-    ImageView iv_deck, iv_card1, iv_card2, iv_card3, iv_card4, cardSwap;
+    ImageView cardDeck, imgCard1, imgCard2, imgCard3, imgCard4, cardSwap;
     Button startButton, swapButton, passButton, spoons;
     ArrayList<Integer> cards;
     int singleCard;
@@ -68,7 +68,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 new Thread(new Thread3(startMessage)).start();
 
                 //Once the game has started, the cards, deck, and the swap/pass buttons are made visible
-                iv_deck.setVisibility(View.VISIBLE);
+                cardDeck.setVisibility(View.VISIBLE);
                 startButton.setVisibility(View.VISIBLE);
                 swapButton.setVisibility(View.VISIBLE);
                 passButton.setVisibility(View.VISIBLE);
@@ -113,11 +113,11 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         });
 
         //Updating the buttons created in this java class with the UI of the buttons
-        iv_deck = (ImageView) findViewById(R.id.iv_deck);
-        iv_card1 = (ImageView) findViewById(R.id.iv_card1);
-        iv_card2 = (ImageView) findViewById(R.id.iv_card2);
-        iv_card3 = (ImageView) findViewById(R.id.iv_card3);
-        iv_card4 = (ImageView) findViewById(R.id.iv_card4);
+        cardDeck = (ImageView) findViewById(R.id.iv_deck);
+        imgCard1 = (ImageView) findViewById(R.id.iv_card1);
+        imgCard2 = (ImageView) findViewById(R.id.iv_card2);
+        imgCard3 = (ImageView) findViewById(R.id.iv_card3);
+        imgCard4 = (ImageView) findViewById(R.id.iv_card4);
         cardSwap = (ImageView) findViewById(R.id.cardSwap);
         startButton = (Button) findViewById(R.id.startButton);
         swapButton = (Button) findViewById(R.id.swapButton);
@@ -125,15 +125,15 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         spoons = (Button) findViewById(R.id.button5);
 
         //Setting the game functionality to be invisible until the game has been started
-        iv_deck.setVisibility(View.INVISIBLE);
+        cardDeck.setVisibility(View.INVISIBLE);
         startButton.setVisibility(View.INVISIBLE);
         swapButton.setVisibility(View.INVISIBLE);
         passButton.setVisibility(View.INVISIBLE);
         spoons.setVisibility(View.INVISIBLE);
-        iv_card1.setVisibility(View.INVISIBLE);
-        iv_card2.setVisibility(View.INVISIBLE);
-        iv_card3.setVisibility(View.INVISIBLE);
-        iv_card4.setVisibility(View.INVISIBLE);
+        imgCard1.setVisibility(View.INVISIBLE);
+        imgCard2.setVisibility(View.INVISIBLE);
+        imgCard3.setVisibility(View.INVISIBLE);
+        imgCard4.setVisibility(View.INVISIBLE);
         cardSwap.setVisibility(View.INVISIBLE);
 
         //Creating an arrayList of cards and adding the cards into the arrayList
@@ -206,21 +206,21 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
 
                 //getting 4 random cards for th host
                 card1 = cards.get(0);
-                card2  = cards.get(1);
+                card2 = cards.get(1);
                 card3 = cards.get(2);
                 card4 = cards.get(3);
 
                 //assigning the cards to the display of the four cards on screen
-                assignImages(card1, iv_card1);
-                assignImages(card2, iv_card2);
-                assignImages(card3, iv_card3);
-                assignImages(card4, iv_card4);
+                assignImages(card1, imgCard1);
+                assignImages(card2, imgCard2);
+                assignImages(card3, imgCard3);
+                assignImages(card4, imgCard4);
 
                 //setting the 4 cards to be visible once they have been assigned
-                iv_card1.setVisibility(View.VISIBLE);
-                iv_card2.setVisibility(View.VISIBLE);
-                iv_card3.setVisibility(View.VISIBLE);
-                iv_card4.setVisibility(View.VISIBLE);
+                imgCard1.setVisibility(View.VISIBLE);
+                imgCard2.setVisibility(View.VISIBLE);
+                imgCard3.setVisibility(View.VISIBLE);
+                imgCard4.setVisibility(View.VISIBLE);
 
                 //removing selected cards from the deck
                 cards.remove(cards.indexOf(card1));
@@ -230,19 +230,19 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
 
                 int tempIndex = 4;
                 //dealing out cards to all the connected players
-                for(int i = 1; i<= finalPlayerCount; i++){
+                for (int i = 1; i <= finalPlayerCount; i++) {
                     //getting four random cards for each player
                     int tempCard1 = cards.get(tempIndex);
-                    int tempCard2 = cards.get(tempIndex+1);
-                    int tempCard3 = cards.get(tempIndex+2);
-                    int tempCard4 = cards.get(tempIndex+3);
+                    int tempCard2 = cards.get(tempIndex + 1);
+                    int tempCard3 = cards.get(tempIndex + 2);
+                    int tempCard4 = cards.get(tempIndex + 3);
                     tempIndex++;
 
                     //passing on the four selected random cards to the players along with the playerId it is intended for
-                    new Thread(new Thread3("Player"+i+" card1 "+tempCard1)).start();
-                    new Thread(new Thread3("Player"+i+" card2 "+tempCard2)).start();
-                    new Thread(new Thread3("Player"+i+" card3 "+tempCard3)).start();
-                    new Thread(new Thread3("Player"+i+" card4 "+tempCard4)).start();
+                    new Thread(new Thread3("Player" + i + " card1 " + tempCard1)).start();
+                    new Thread(new Thread3("Player" + i + " card2 " + tempCard2)).start();
+                    new Thread(new Thread3("Player" + i + " card3 " + tempCard3)).start();
+                    new Thread(new Thread3("Player" + i + " card4 " + tempCard4)).start();
 
                     //removing the selected cards from th deck
                     cards.remove(cards.indexOf(tempCard1));
@@ -257,12 +257,11 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         });
 
         //if the deck has been clicked, a new card is issued
-        iv_deck.setOnClickListener(new View.OnClickListener() {
+        cardDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if the deck is not empty, getting the next card
-                if(cards.isEmpty() == false)
-                {
+                if (cards.isEmpty() == false) {
                     singleCard = cards.get(0);
                 }
 
@@ -274,17 +273,16 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         });
 
         //if a card on screen has been clicked
-        iv_card1.setOnClickListener(new View.OnClickListener() {
+        imgCard1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if its clicked on and swap status is true, then swap the card
-                if(swapStatus)
-                {
+                if (swapStatus) {
                     //assigning the card to display on screen
                     assignImages(card1, cardSwap);
-                    assignImages(singleCard, iv_card1);
+                    assignImages(singleCard, imgCard1);
                     //sending a message of the swapped card to the next player
-                    new Thread(new Thread3("Player1 cardS "+card1)).start();
+                    new Thread(new Thread3("Player1 cardS " + card1)).start();
                     card1 = singleCard;
                     //new card is removed from deck
                     cards.remove(cards.indexOf(singleCard));
@@ -299,17 +297,16 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         });
 
         //if a card on screen has been clicked
-        iv_card2.setOnClickListener(new View.OnClickListener() {
+        imgCard2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if its clicked on and swap status is true, then swap the card
-                if(swapStatus)
-                {
+                if (swapStatus) {
                     //assigning the card to display on screen
                     assignImages(card2, cardSwap);
-                    assignImages(singleCard, iv_card2);
+                    assignImages(singleCard, imgCard2);
                     //sending a message of the swapped card to the next player
-                    new Thread(new Thread3("Player1 cardS "+card2)).start();
+                    new Thread(new Thread3("Player1 cardS " + card2)).start();
                     card2 = singleCard;
                     //new card is removed from deck
                     cards.remove(cards.indexOf(singleCard));
@@ -321,17 +318,16 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         });
 
         //if a card on screen has been clicked
-        iv_card3.setOnClickListener(new View.OnClickListener() {
+        imgCard3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if its clicked on and swap status is true, then swap the card
-                if(swapStatus)
-                {
+                if (swapStatus) {
                     //assigning the card to display on screen
                     assignImages(card3, cardSwap);
-                    assignImages(singleCard, iv_card3);
+                    assignImages(singleCard, imgCard3);
                     //sending a message of the swapped card to the next player
-                    new Thread(new Thread3("Player1 cardS "+card3)).start();
+                    new Thread(new Thread3("Player1 cardS " + card3)).start();
                     card3 = singleCard;
                     //new card is removed from deck
                     cards.remove(cards.indexOf(singleCard));
@@ -344,17 +340,16 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         });
 
         //if a card on screen has been clicked
-        iv_card4.setOnClickListener(new View.OnClickListener() {
+        imgCard4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if its clicked on and swap status is true, then swap the card
-                if(swapStatus)
-                {
+                if (swapStatus) {
                     //assigning the card to display on screen
                     assignImages(card4, cardSwap);
-                    assignImages(singleCard, iv_card4);
+                    assignImages(singleCard, imgCard4);
                     //sending a message of the swapped card to the next player
-                    new Thread(new Thread3("Player1 cardS "+card4)).start();
+                    new Thread(new Thread3("Player1 cardS " + card4)).start();
                     card4 = singleCard;
                     //new card is removed from deck
                     cards.remove(cards.indexOf(singleCard));
@@ -383,7 +378,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 cardSwap.setVisibility(View.INVISIBLE);
                 //card is passed to next person
                 //sending a message to the players with the passed card
-                new Thread(new Thread3("Player1 cardP "+singleCard)).start();
+                new Thread(new Thread3("Player1 cardP " + singleCard)).start();
                 cards.remove(cards.indexOf(singleCard));
             }
         });
@@ -395,7 +390,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 //if the validation passed for the four matching cards, the winner is directed to the winning page, and the rest of the players are directed to the loosing page
                 if (checkWinningCondition()) {
                     Toast.makeText(DiscoverRoomsActivity.this, "Congratulations! You won!", Toast.LENGTH_LONG).show();
-                    new Thread(new DiscoverRoomsActivity.Thread3("Player0 cardW "+singleCard)).start();
+                    new Thread(new DiscoverRoomsActivity.Thread3("Player0 cardW " + singleCard)).start();
                     Intent intentTutorial = new Intent(DiscoverRoomsActivity.this, WinningPageActivity.class);
                     startActivity(intentTutorial);
                 } else {
@@ -502,15 +497,15 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                 try {
                     final String message = input.readLine();
                     //Checking for game functionality messages that start with player
-                    if(message.startsWith("Player")) {
-                        int playerNum = Integer.parseInt(message.substring(6,7));   //interpretting the message to find which player the message is intended for
-                        String msg = message.substring(8,13);   //interpretting the message to find the intented game functionality like winning move detected
+                    if (message.startsWith("Player")) {
+                        int playerNum = Integer.parseInt(message.substring(6, 7));   //interpretting the message to find which player the message is intended for
+                        String msg = message.substring(8, 13);   //interpretting the message to find the intented game functionality like winning move detected
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if(myId!=playerNum){
+                                if (myId != playerNum) {
                                     //checking to see if a different player won the game, and redirecting user to the lost game screen
-                                    if(msg.equals("cardW")) {
+                                    if (msg.equals("cardW")) {
                                         Toast.makeText(DiscoverRoomsActivity.this, "You lost!", Toast.LENGTH_SHORT).show();
                                         Intent intentLoose = new Intent(DiscoverRoomsActivity.this, LoosingPageActivity.class);
                                         startActivity(intentLoose);
@@ -521,7 +516,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     }
                     //Listening for messages from players, and broadcasting the message to all the players connected
                     if (message != null) {
-                        broadcastToPlayers("client: " + message+" "); // Broadcast the received message to all clients
+                        broadcastToPlayers("client: " + message + " "); // Broadcast the received message to all clients
                         runOnUiThread(() -> {
                             displayMessages.append("client: " + message + "\n");
                         });

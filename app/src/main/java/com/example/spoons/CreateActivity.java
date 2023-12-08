@@ -9,10 +9,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class CreateActivity extends AppCompatActivity {
+    //creating buttons
     ImageButton backButtonPressed;
     ImageButton tutorialButton;
     ImageButton createGameButton;
-
     ImageButton discoverGameButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +23,18 @@ public class CreateActivity extends AppCompatActivity {
         backButtonPressed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Changing views if button clicked
                 Intent intentTutorial = new Intent(CreateActivity.this, MainActivity.class);
                 startActivity(intentTutorial);
             }
         });
 
+        //if the tutorials button is clicked
         tutorialButton = (ImageButton)findViewById(R.id.imageButton);
         tutorialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Changing views
                 Intent intentTutorial = new Intent(CreateActivity.this, TutorialActivity.class);
                 startActivity(intentTutorial);
             }
@@ -41,11 +44,13 @@ public class CreateActivity extends AppCompatActivity {
         createGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Changing views when button is clicked
                 Intent intentTutorial = new Intent(CreateActivity.this,DiscoverRoomsActivity.class);
                 startActivity(intentTutorial);
             }
         });
 
+        //When discover rooms button is clicked
         discoverGameButton = (ImageButton)findViewById(R.id.imageView3);
         discoverGameButton.setOnClickListener(new View.OnClickListener() {
             @Override

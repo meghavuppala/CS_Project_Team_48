@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+//Corresponding java file to the xml of tutorial
 public class TutorialActivity extends AppCompatActivity {
 
     ImageButton backButtonPressed;
@@ -17,6 +18,7 @@ public class TutorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
 
+        //helps alternate between views
         backButtonPressed = (ImageButton)findViewById(R.id.imageButton3);
         backButtonPressed.setOnClickListener(new View.OnClickListener() {
             @Override

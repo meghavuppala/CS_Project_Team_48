@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+//Corresponding java file to the xml of losing page
 public class LoosingPageActivity extends AppCompatActivity {
 
     @Override

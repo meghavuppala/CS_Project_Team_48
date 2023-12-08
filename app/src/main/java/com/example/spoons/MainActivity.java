@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
+    //creating buttons
     ImageButton tutorial;
     ImageButton clickToPlay;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tutorial = (ImageButton)findViewById(R.id.imageButton7);
+        //When the tutorial button is clicked takes to the tutorial page
         tutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Click to play takes us to the game options page
         clickToPlay = (ImageButton)findViewById(R.id.imageButton6);
         clickToPlay.setOnClickListener(new View.OnClickListener() {
             @Override
