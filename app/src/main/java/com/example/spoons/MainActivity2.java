@@ -30,40 +30,29 @@ public class MainActivity2 extends AppCompatActivity {
     String SERVER_IP;
     int SERVER_PORT;
     Button connectButton;
-
     private PrintWriter output;
     private BufferedReader input;
     private Handler handler;
-
     private int playerId;
-
-    //---------------------------------------------------------------------------------
-
     ImageView iv_card1, iv_card2, iv_card3, iv_card4, cardSwap;
-    Button swapButton;
-    Button passButton;
-    Button spoons;
-
+    Button swapButton, passButton, spoons;
     ArrayList<Integer> cards;
-
     int singleCard;
-
     boolean swapStatus = false;
-
     int card1 = 0;
     int card2 = 0;
     int card3 = 0;
     int card4 = 0;
-
     TextView playerDisplay;
-
     int nextPlayer = 0;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main2);    //Getting the UI of the screen from the main_activity2 xml file
+
+        //Updating the buttons created in this java class with the UI of the buttons
         hostIP = findViewById(R.id.etIP);
         hostPort = findViewById(R.id.etPort);
         displayMessages = findViewById(R.id.tvMessages);

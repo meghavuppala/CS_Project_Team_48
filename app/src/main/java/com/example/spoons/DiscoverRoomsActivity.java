@@ -32,77 +32,49 @@ import java.util.List;
 public class DiscoverRoomsActivity extends AppCompatActivity {
     ServerSocket serverSocket;
     Thread Thread1 = null;
-    TextView displayIP, displayPort;
-    TextView displayMessages;
+    TextView displayIP, displayPort, displayMessages;
     EditText sendMessage;
-    Button btnSend;
-    Button startGame;
-    public static String SERVER_IP = "";
-    public static final int SERVER_PORT = 44444;
-    public static final int MAX_PLAYERS = 4;
+    Button btnSend, startGame;
+    public static String serverIp = "";
+    public static final int serverPort = 44444;
+    public static final int maxPlayers = 4;
     String message;
     private int playerCounter = 0;
-
     private List<PrintWriter> playerOutputs = new ArrayList<>();
-
-    //------------------------------------------------------------------------------
-
-
     ImageView iv_deck, iv_card1, iv_card2, iv_card3, iv_card4, cardSwap;
-    Button startButton;
-    Button swapButton;
-    Button passButton;
-    Button spoons;
-
+    Button startButton, swapButton, passButton, spoons;
     ArrayList<Integer> cards;
-
     int singleCard;
-
     boolean swapStatus = false;
-
     int finalPlayerCount;
-
     int myId = 0;
-
     int card1 = 0;
     int card2 = 0;
     int card3 = 0;
     int card4 = 0;
 
-    int card5 = 0;
-    int card6 = 0;
-    int card7 = 0;
-    int card8 = 0;
-
-    int card9 = 0;
-    int card10 = 0;
-    int card11 = 0;
-    int card12 = 0;
-
-    int card13 = 0;
-    int card14 = 0;
-    int card15 = 0;
-    int card16 = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_discover_rooms);
+        setContentView(R.layout.activity_discover_rooms);   //Getting the UI of the screen from the activity_discover_rooms xml file
 
-        startGame = findViewById(R.id.startGameHost);
+        startGame = findViewById(R.id.startGameHost);   //Linking the startGame button with the UI for the button
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Sending a message to the players that the host has started the game
                 String startMessage = "Host started the game";
                 new Thread(new Thread3(startMessage)).start();
 
+                //Once the game has started, the cards, deck, and the swap/pass buttons are made visible
                 iv_deck.setVisibility(View.VISIBLE);
                 startButton.setVisibility(View.VISIBLE);
                 swapButton.setVisibility(View.VISIBLE);
                 passButton.setVisibility(View.VISIBLE);
                 spoons.setVisibility(View.VISIBLE);
 
+                //Once the game has started, the connectivity features are made invisible
                 displayIP.setVisibility(View.INVISIBLE);
                 displayPort.setVisibility(View.INVISIBLE);
                 displayMessages.setVisibility(View.INVISIBLE);
@@ -113,18 +85,23 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
 
         });
 
+        //Updating the buttons created in this java class with the UI of the buttons
         displayIP = findViewById(R.id.tvIP);
         displayPort = findViewById(R.id.tvPort);
         displayMessages = findViewById(R.id.tvMessages);
         sendMessage = findViewById(R.id.etMessage);
         btnSend = findViewById(R.id.btnSend);
+        //getting the IP address of the host to display
         try {
-            SERVER_IP = getLocalIpAddress();
+            serverIp = getLocalIpAddress();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+
         Thread1 = new Thread(new Thread1());
         Thread1.start();
+
+        //When the send button is clicked, the message typed is being sent to the players
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,9 +112,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             }
         });
 
-
-        //--------------------------------------------------------------------------
-
+        //Updating the buttons created in this java class with the UI of the buttons
         iv_deck = (ImageView) findViewById(R.id.iv_deck);
         iv_card1 = (ImageView) findViewById(R.id.iv_card1);
         iv_card2 = (ImageView) findViewById(R.id.iv_card2);
@@ -149,22 +124,20 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         passButton = (Button) findViewById(R.id.passButton);
         spoons = (Button) findViewById(R.id.button5);
 
-
+        //Setting the game functionality to be invisible until the game has been started
         iv_deck.setVisibility(View.INVISIBLE);
         startButton.setVisibility(View.INVISIBLE);
         swapButton.setVisibility(View.INVISIBLE);
         passButton.setVisibility(View.INVISIBLE);
         spoons.setVisibility(View.INVISIBLE);
-
-
         iv_card1.setVisibility(View.INVISIBLE);
         iv_card2.setVisibility(View.INVISIBLE);
         iv_card3.setVisibility(View.INVISIBLE);
         iv_card4.setVisibility(View.INVISIBLE);
         cardSwap.setVisibility(View.INVISIBLE);
 
+        //Creating an arrayList of cards and adding the cards into the arrayList
         cards = new ArrayList<>();
-
         //Diamonds
         cards.add(0);
         cards.add(1);
@@ -223,88 +196,97 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         cards.add(51);
         //cards.add(52);
 
-
-
-
+        //When the startButton is clicked for the game, the host deals 4 random cards to all the players including themselves
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Collections.shuffle(cards);
+                Collections.shuffle(cards); //shuffling the deck
 
-                new Thread(new Thread3("Game Has Started")).start();
+                new Thread(new Thread3("Game Has Started")).start();    //sending a message to the players that the game has started
 
-
+                //getting 4 random cards for th host
                 card1 = cards.get(0);
                 card2  = cards.get(1);
                 card3 = cards.get(2);
                 card4 = cards.get(3);
 
+                //assigning the cards to the display of the four cards on screen
                 assignImages(card1, iv_card1);
                 assignImages(card2, iv_card2);
                 assignImages(card3, iv_card3);
                 assignImages(card4, iv_card4);
 
+                //setting the 4 cards to be visible once they have been assigned
                 iv_card1.setVisibility(View.VISIBLE);
                 iv_card2.setVisibility(View.VISIBLE);
                 iv_card3.setVisibility(View.VISIBLE);
                 iv_card4.setVisibility(View.VISIBLE);
 
-                //remove selected cards from arraylist
+                //removing selected cards from the deck
                 cards.remove(cards.indexOf(card1));
                 cards.remove(cards.indexOf(card2));
                 cards.remove(cards.indexOf(card3));
                 cards.remove(cards.indexOf(card4));
 
                 int tempIndex = 4;
+                //dealing out cards to all the connected players
                 for(int i = 1; i<= finalPlayerCount; i++){
+                    //getting four random cards for each player
                     int tempCard1 = cards.get(tempIndex);
                     int tempCard2 = cards.get(tempIndex+1);
                     int tempCard3 = cards.get(tempIndex+2);
                     int tempCard4 = cards.get(tempIndex+3);
                     tempIndex++;
 
+                    //passing on the four selected random cards to the players along with the playerId it is intended for
                     new Thread(new Thread3("Player"+i+" card1 "+tempCard1)).start();
                     new Thread(new Thread3("Player"+i+" card2 "+tempCard2)).start();
                     new Thread(new Thread3("Player"+i+" card3 "+tempCard3)).start();
                     new Thread(new Thread3("Player"+i+" card4 "+tempCard4)).start();
 
+                    //removing the selected cards from th deck
                     cards.remove(cards.indexOf(tempCard1));
                     cards.remove(cards.indexOf(tempCard2));
                     cards.remove(cards.indexOf(tempCard3));
                     cards.remove(cards.indexOf(tempCard4));
                 }
 
-                startButton.setVisibility(View.INVISIBLE);
+                startButton.setVisibility(View.INVISIBLE);  //setting the startButton to be invisible since the game has been started
 
             }
         });
 
+        //if the deck has been clicked, a new card is issued
         iv_deck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Collections.shuffle(cards);
-                //check if there are cards left
+                //if the deck is not empty, getting the next card
                 if(cards.isEmpty() == false)
                 {
                     singleCard = cards.get(0);
                 }
 
+                //assigning the new card's image to the UI of the first card
                 assignImages(singleCard, cardSwap);
                 cardSwap.setVisibility(View.VISIBLE);
 
             }
         });
 
+        //if a card on screen has been clicked
         iv_card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if its clicked on and swap status is true, then swap the card
                 if(swapStatus)
                 {
+                    //assigning the card to display on screen
                     assignImages(card1, cardSwap);
                     assignImages(singleCard, iv_card1);
+                    //sending a message of the swapped card to the next player
                     new Thread(new Thread3("Player1 cardS "+card1)).start();
                     card1 = singleCard;
+                    //new card is removed from deck
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -316,16 +298,20 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             }
         });
 
+        //if a card on screen has been clicked
         iv_card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if its clicked on and swap status is true, then swap the card
                 if(swapStatus)
                 {
+                    //assigning the card to display on screen
                     assignImages(card2, cardSwap);
                     assignImages(singleCard, iv_card2);
+                    //sending a message of the swapped card to the next player
                     new Thread(new Thread3("Player1 cardS "+card2)).start();
                     card2 = singleCard;
+                    //new card is removed from deck
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     swapStatus = false;
@@ -334,16 +320,20 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             }
         });
 
+        //if a card on screen has been clicked
         iv_card3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if its clicked on and swap status is true, then swap the card
                 if(swapStatus)
                 {
+                    //assigning the card to display on screen
                     assignImages(card3, cardSwap);
                     assignImages(singleCard, iv_card3);
+                    //sending a message of the swapped card to the next player
                     new Thread(new Thread3("Player1 cardS "+card3)).start();
                     card3 = singleCard;
+                    //new card is removed from deck
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -353,16 +343,20 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             }
         });
 
+        //if a card on screen has been clicked
         iv_card4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if its clicked on and swap status is true, then swap the card
                 if(swapStatus)
                 {
+                    //assigning the card to display on screen
                     assignImages(card4, cardSwap);
                     assignImages(singleCard, iv_card4);
+                    //sending a message of the swapped card to the next player
                     new Thread(new Thread3("Player1 cardS "+card4)).start();
                     card4 = singleCard;
+                    //new card is removed from deck
                     cards.remove(cards.indexOf(singleCard));
                     cardSwap.setVisibility(View.INVISIBLE);
                     //card is passed to next person
@@ -388,20 +382,24 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 cardSwap.setVisibility(View.INVISIBLE);
                 //card is passed to next person
+                //sending a message to the players with the passed card
                 new Thread(new Thread3("Player1 cardP "+singleCard)).start();
                 cards.remove(cards.indexOf(singleCard));
             }
         });
 
+        //if the spoons button is clicked
         spoons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //if the validation passed for the four matching cards, the winner is directed to the winning page, and the rest of the players are directed to the loosing page
                 if (checkWinningCondition()) {
                     Toast.makeText(DiscoverRoomsActivity.this, "Congratulations! You won!", Toast.LENGTH_LONG).show();
                     new Thread(new DiscoverRoomsActivity.Thread3("Player0 cardW "+singleCard)).start();
                     Intent intentTutorial = new Intent(DiscoverRoomsActivity.this, WinningPageActivity.class);
                     startActivity(intentTutorial);
                 } else {
+                    //if the validation does not pass, a message is displayed saying winning conditions have not passed
                     Toast.makeText(DiscoverRoomsActivity.this, "Not the winning move!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -409,21 +407,16 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
 
     }
 
+    //checks if the player passed the winning conditions
     private boolean checkWinningCondition() {
-        // Debug prints
-        System.out.println("Card 1: " + card1);
-        System.out.println("Card 2: " + card2);
-        System.out.println("Card 3: " + card3);
-        System.out.println("Card 4: " + card4);
+
         boolean var = false;
         int value1 = (card1 % 13);
         int value2 = (card2 % 13);
         int value3 = (card3 % 13);
         int value4 = (card4 % 13);
-        //  Toast.makeText(DiscoverRoomsActivity.this, value1 + " " +value2 + " " + value3 + " " + value4 , Toast.LENGTH_LONG).show();
 
-
-
+        //if all the cards have the same number, the function returns true
         if ((value1 == value2) && (value2 == value3) && (value3 == value4)) {
             var = true;
         } else {
@@ -432,7 +425,9 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         return var;
     }
 
+    //getting the IP address of the host to display
     private String getLocalIpAddress() throws UnknownHostException {
+        //creating a wifi manager and getting the IP from the wifi connection information
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         assert wifiManager != null;
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -444,16 +439,16 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                serverSocket = new ServerSocket(SERVER_PORT);   //creating a new socket for the host, used for communication with players
+                serverSocket = new ServerSocket(serverPort);   //creating a new socket for the host, used for communication with players
                 runOnUiThread(() -> {
                     displayMessages.setText("Not connected");    //displaying connectivity status of host and players
-                    displayIP.setText("IP: " + SERVER_IP);   //displaying the IP address of the server
-                    displayPort.setText("Port: " + SERVER_PORT); //displaying the port to connect to host
+                    displayIP.setText("IP: " + serverIp);   //displaying the IP address of the server
+                    displayPort.setText("Port: " + serverPort); //displaying the port to connect to host
                 });
 
                 int currPlayerCount = 0;   //variable to keep track of the number of players connected
 
-                while (currPlayerCount < MAX_PLAYERS) {
+                while (currPlayerCount < maxPlayers) {
                     Socket socket = serverSocket.accept();  //creating a socket for each player for communication
                     PrintWriter hostOutput = new PrintWriter(socket.getOutputStream(), true);   //writing data to the socket ouput
                     BufferedReader hostInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));  //keeps track of the input data from the socket
@@ -471,7 +466,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
                     });
 
                     //Sending a message to all players that player limit has reached and host can begin game
-                    if (currPlayerCount == MAX_PLAYERS) {
+                    if (currPlayerCount == maxPlayers) {
                         broadcastToPlayers("All players connected. Game can start!");
                     }
 
@@ -569,8 +564,7 @@ public class DiscoverRoomsActivity extends AppCompatActivity {
         }
     }
 
-    //-----------------------------------------------------------------------------------
-
+    //function to assign images to the card image based on the card index provided
     public void assignImages(int card, ImageView image) {
         switch (card) {
             //Diamonds
